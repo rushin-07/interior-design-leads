@@ -1,0 +1,9 @@
+{
+  "name": "interior-set-design-internships",
+  "version": "1.0.0",
+  "description": "Cute Pink Commercial Interior & Set Design Internship Scout Dashboard",
+  "scripts": {
+    "start": "npx serve public"
+  },
+  "dependencies": {}
+}
