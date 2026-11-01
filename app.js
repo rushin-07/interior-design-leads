@@ -332,6 +332,14 @@ function applyFilters() {
     }
 }
 
+function getLinkedInUrl(firm) {
+    if (firm.linkedin && typeof firm.linkedin === 'string' && firm.linkedin.startsWith('http')) {
+        return firm.linkedin;
+    }
+    const query = encodeURIComponent(`${firm.name || ''} ${firm.city || ''}`);
+    return `https://www.linkedin.com/search/results/all/?keywords=${query}`;
+}
+
 function renderTable(leads) {
     const tbody = document.getElementById('leads-tbody');
     if (!tbody) return;
@@ -341,6 +349,7 @@ function renderTable(leads) {
         const tr = document.createElement('tr');
         
         const cityClass = firm.city === 'Pune' ? 'city-pune' : 'city-mumbai';
+    const liUrl = getLinkedInUrl(firm);
 
         let catClass = 'tag-workspace';
         if (firm.category.includes('Hospitality')) catClass = 'tag-hospitality';
@@ -350,6 +359,8 @@ function renderTable(leads) {
         const hrBadge = (firm.confidence || '').includes('Direct HR') 
             ? '<i class="fa-solid fa-star hr-star" title="Direct HR Verified"></i>' 
             : '';
+
+        const liUrl = getLinkedInUrl(firm);
 
         tr.innerHTML = `
             <td class="col-id">${index + 1}</td>
@@ -370,7 +381,7 @@ function renderTable(leads) {
             </td>
             <td class="links-cell" onclick="event.stopPropagation();">
                 ${firm.website ? `<a href="${firm.website}" target="_blank" rel="noopener noreferrer" class="icon-link" title="Website"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : ''}
-                ${firm.linkedin ? `<a href="${firm.linkedin}" target="_blank" rel="noopener noreferrer" class="icon-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>` : ''}
+                <a href="${liUrl}" target="_blank" rel="noopener noreferrer" class="icon-link" title="LinkedIn Profile"><i class="fa-brands fa-linkedin-in"></i></a>
             </td>
             <td>
                 <div class="desc-text" title="${escapeHtml(firm.what_firm_does)}">${firm.what_firm_does}</div>
@@ -414,6 +425,7 @@ function openDrawer(firm) {
     if (!overlay || !content) return;
 
     const cityClass = firm.city === 'Pune' ? 'city-pune' : 'city-mumbai';
+    const liUrl = getLinkedInUrl(firm);
 
     content.innerHTML = `
         <div class="drawer-header">
@@ -469,12 +481,10 @@ function openDrawer(firm) {
                         <span>Portfolio: ${firm.website}</span>
                     </a>
                 ` : ''}
-                ${firm.linkedin ? `
-                    <a href="${firm.linkedin}" target="_blank" rel="noopener noreferrer" class="drawer-contact-item">
-                        <i class="fa-brands fa-linkedin"></i>
-                        <span>LinkedIn Page</span>
-                    </a>
-                ` : ''}
+                <a href="${liUrl}" target="_blank" rel="noopener noreferrer" class="drawer-contact-item">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <span>LinkedIn Directory / Profile</span>
+                </a>
             </div>
         </div>
 
