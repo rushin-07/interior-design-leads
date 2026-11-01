@@ -11,155 +11,16 @@ let currentFilters = {
     contact: 'all'
 };
 
-// Password Verification Keys
-const VALID_PASSWORDS = ['QT🌶️', 'QT🌶', 'QT', 'QT:chili:', 'qt🌶️', 'qt🌶', 'qt'];
-
-// Initialize on Load
+// Initialize on Load (Immediate Open - No Passcode)
 document.addEventListener('DOMContentLoaded', () => {
-    checkExistingAuth();
+    fetchLeads();
     setupEventListeners();
 });
 
 // ==========================================================================
-// 1. PASSWORD GATE & AUTHENTICATION
-// ==========================================================================
-function checkExistingAuth() {
-    const isAuthed = localStorage.getItem('studio_scout_auth');
-    if (isAuthed === 'true') {
-        unlockDashboard(false);
-    } else {
-        document.getElementById('password-gate').style.display = 'flex';
-        document.getElementById('main-dashboard').style.display = 'none';
-    }
-}
-
-function handleUnlock(e) {
-    if (e && typeof e.preventDefault === 'function') {
-        e.preventDefault();
-    }
-    const input = document.getElementById('password-input');
-    const errorEl = document.getElementById('gate-error');
-    let entered = (input.value || '').trim();
-
-    // Lenient check: If user enters nothing, pre-populate QT🌶️ and unlock directly
-    if (!entered) {
-        entered = 'QT🌶️';
-        input.value = 'QT🌶️';
-    }
-
-    const clean = entered.replace(/\s+/g, '').toLowerCase();
-    const stripped = clean.replace(/[\uFE0E\uFE0F]/g, '');
-
-    const isMatch = (
-        stripped.includes('qt') ||
-        stripped.includes('🌶') ||
-        clean.includes('qt') ||
-        VALID_PASSWORDS.some(p => p.toLowerCase() === entered.toLowerCase())
-    );
-
-    if (isMatch) {
-        if (errorEl) errorEl.style.display = 'none';
-        try {
-            localStorage.setItem('studio_scout_auth', 'true');
-        } catch (err) {
-            console.warn('Storage unavailable', err);
-        }
-        
-        // Subtle minimal confetti shimmer if library loaded
-        if (typeof confetti === 'function') {
-            try {
-                confetti({
-                    particleCount: 40,
-                    spread: 50,
-                    origin: { y: 0.6 },
-                    colors: ['#c75677', '#d9b8c4', '#ffffff', '#1e1e24']
-                });
-            } catch (err) {}
-        }
-
-        showToast('Access granted.');
-        unlockDashboard(true);
-    } else {
-        if (errorEl) {
-            errorEl.textContent = 'Invalid access key. Use "QT" with the red pepper 🌶️';
-            errorEl.style.display = 'block';
-        }
-        input.focus();
-    }
-}
-window.handleUnlock = handleUnlock;
-
-function unlockDashboard(animate = true) {
-    const gate = document.getElementById('password-gate');
-    const dashboard = document.getElementById('main-dashboard');
-    
-    if (animate) {
-        gate.style.transition = 'opacity 0.25s ease';
-        gate.style.opacity = '0';
-        setTimeout(() => {
-            gate.style.display = 'none';
-            dashboard.style.display = 'block';
-            dashboard.style.opacity = '0';
-            dashboard.style.transition = 'opacity 0.25s ease';
-            setTimeout(() => { dashboard.style.opacity = '1'; }, 20);
-        }, 250);
-    } else {
-        gate.style.display = 'none';
-        dashboard.style.display = 'block';
-    }
-
-    fetchLeads();
-}
-
-function lockDashboard() {
-    localStorage.removeItem('studio_scout_auth');
-    document.getElementById('main-dashboard').style.display = 'none';
-    const gate = document.getElementById('password-gate');
-    gate.style.display = 'flex';
-    gate.style.opacity = '1';
-    document.getElementById('password-input').value = '';
-    showToast('Directory locked.');
-}
-
-// ==========================================================================
-// 2. EVENT LISTENERS
+// 1. EVENT LISTENERS
 // ==========================================================================
 function setupEventListeners() {
-    // Gate Form & Unlock Button
-    const gateForm = document.getElementById('gate-form');
-    if (gateForm) {
-        gateForm.addEventListener('submit', handleUnlock);
-    }
-    const unlockBtn = document.getElementById('unlock-btn');
-    if (unlockBtn) {
-        unlockBtn.addEventListener('click', handleUnlock);
-    }
-    const pwdInput = document.getElementById('password-input');
-    if (pwdInput) {
-        pwdInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                handleUnlock(e);
-            }
-        });
-    }
-
-    // Red Pepper Button
-    const pepperBtn = document.getElementById('pepper-btn');
-    if (pepperBtn) {
-        pepperBtn.addEventListener('click', () => {
-            const input = document.getElementById('password-input');
-            input.value += '🌶️';
-            input.focus();
-        });
-    }
-
-    // Lock Button
-    const lockBtn = document.getElementById('lock-btn');
-    if (lockBtn) {
-        lockBtn.addEventListener('click', lockDashboard);
-    }
-
     // Sync Button
     const syncBtn = document.getElementById('sync-btn');
     if (syncBtn) {
