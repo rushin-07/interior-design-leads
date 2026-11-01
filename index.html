@@ -3,57 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌸 Interior & Set Design Internship Scout | Pune & Mumbai</title>
-    <!-- Google Fonts -->
+    <title>Studio Scout | Commercial Interior & Set Design Directory</title>
+    <!-- Modern Sleek Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Cute Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Confetti & Canvas Effects -->
+    <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Floating Sparkles & Soft Heart Bubbles Background -->
-    <div class="sparkles-container" id="sparkles-container"></div>
+    <!-- Minimal Ambient Background Glow -->
+    <div class="ambient-glow"></div>
 
-    <!-- ==================== PASSWORD GATE OVERLAY ==================== -->
+    <!-- ==================== PASSWORD GATE (SLEEK & MINIMAL) ==================== -->
     <div id="password-gate" class="gate-overlay">
         <div class="gate-card">
-            <div class="gate-mascot">
-                <!-- Cute Teddy Bear with Heart GIF -->
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIzcnB3bzR1amJldXRndXFmOHM5cGhrNmg4cGtvdjJubGlmNzFjayZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/M90mJvfWfd5mbUuULX/giphy.gif" alt="Cute Plushie" class="mascot-img">
+            <div class="gate-icon-badge">
+                <i class="fa-solid fa-compass-drafting"></i>
             </div>
-            <div class="gate-badge">🌸 Curated Internship Vault</div>
-            <h2 class="gate-title">Welcome! ✨</h2>
-            <p class="gate-subtitle">Commercial interior & set design internship directory for Pune & Mumbai.</p>
+            <div class="gate-badge">Exclusive Access</div>
+            <h2 class="gate-title">Studio Scout</h2>
+            <p class="gate-subtitle">Commercial interior & set design internship directory across Pune & Mumbai.</p>
             
             <form id="gate-form" class="gate-form" onsubmit="event.preventDefault(); handleUnlock();">
                 <div class="input-wrapper">
-                    <i class="fa-solid fa-key input-icon"></i>
-                    <input type="text" id="password-input" placeholder="Enter password..." autocomplete="off" autofocus>
-                    <button type="button" class="btn-pepper" id="pepper-btn" title="Click to add red pepper emoji">🌶️</button>
+                    <i class="fa-solid fa-lock input-icon"></i>
+                    <input type="text" id="password-input" placeholder="Enter access key..." autocomplete="off" autofocus>
+                    <button type="button" class="btn-pepper" id="pepper-btn" title="Add pepper emoji">🌶️</button>
                 </div>
                 <div id="gate-error" class="gate-error" style="display:none;"></div>
                 
                 <button type="submit" class="btn-unlock">
-                    <span>Unlock Directory</span>
+                    <span>Enter Directory</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </form>
 
             <div class="gate-hint">
-                <span>Hint:</span> Password is <strong>QT🌶️</strong>
-            </div>
-
-            <div class="gate-decorations">
-                <span class="decor-toy">🧸</span>
-                <span class="decor-toy">🎀</span>
-                <span class="decor-toy">🎨</span>
-                <span class="decor-toy">🌸</span>
-                <span class="decor-toy">🎬</span>
+                Passcode: <strong>QT🌶️</strong>
             </div>
         </div>
     </div>
@@ -65,105 +56,100 @@
         <header class="top-nav">
             <div class="nav-left">
                 <div class="logo-circle">
-                    <span class="logo-emoji">🧸</span>
+                    <i class="fa-solid fa-shapes"></i>
                 </div>
                 <div class="brand-text">
                     <div class="brand-title">
                         <span>Studio Scout</span>
-                        <span class="sparkle-tag">🌸 Pink Edition</span>
+                        <span class="edition-tag">Pune & Mumbai</span>
                     </div>
-                    <div class="brand-sub">Commercial Interior & Set Design Internships • Pune & Mumbai (Dec 2026 - Apr 2026)</div>
+                    <div class="brand-sub">Commercial Interior & Set Design Directory • Winter/Spring 2026</div>
                 </div>
             </div>
 
             <div class="nav-right">
-                <div class="cute-tag-pill">
-                    <i class="fa-solid fa-sparkles"></i>
-                    <span>Pune & Mumbai Edition</span>
-                </div>
                 <button class="nav-btn btn-export" id="export-csv-btn">
-                    <i class="fa-solid fa-file-excel"></i>
+                    <i class="fa-solid fa-download"></i>
                     <span>Export CSV</span>
                 </button>
                 <button class="nav-btn btn-sync" id="sync-btn" title="Refresh Leads Data">
                     <i class="fa-solid fa-arrows-rotate"></i>
-                    <span>Refresh</span>
+                    <span>Sync</span>
                 </button>
-                <button class="nav-btn btn-lock" id="lock-btn" title="Lock Dashboard">
+                <button class="nav-btn btn-lock" id="lock-btn" title="Lock Directory">
                     <i class="fa-solid fa-lock"></i>
                 </button>
             </div>
         </header>
 
-        <!-- CUTE INSPIRATIONAL BANNER -->
+        <!-- SLEEK HERO BANNER -->
         <section class="hero-banner">
             <div class="banner-content">
-                <div class="banner-pill">✨ Curated Directory ✨</div>
-                <h1>Commercial Interior & Set Design Directory</h1>
-                <p>Curated list of commercial workspaces, hospitality architecture, and Bollywood set design houses in Pune & Mumbai open for internships.</p>
+                <div class="banner-pill">Curated Directory</div>
+                <h1>Commercial Workplaces & Set Design Studios</h1>
+                <p>Vetted database of commercial workplace architects, hospitality interiors, and Bollywood production design firms hiring interns for Dec 2026 – Apr 2026.</p>
                 <div class="banner-features">
-                    <span><i class="fa-solid fa-check-circle"></i> Strictly Commercial & Set Design (No Residentials)</span>
-                    <span><i class="fa-solid fa-check-circle"></i> Direct HR & Career Contacts</span>
-                    <span><i class="fa-solid fa-check-circle"></i> Instant 1-Click Email Outreach</span>
+                    <span><i class="fa-solid fa-check"></i> Strictly Commercial & Set Design (No Residential)</span>
+                    <span><i class="fa-solid fa-check"></i> Direct HR & Principal Inboxes</span>
+                    <span><i class="fa-solid fa-check"></i> Tailored Outreach Pitch Drafter</span>
                 </div>
             </div>
-            <div class="banner-mascot">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZW1qZjN1Z2tzcG9hOG5jMTM1Z2pmZTFybmJpNDV3eXBzYnNtNXU0diZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/LnQjpWaON8nhr21vNW/giphy.gif" alt="Cute bunny animation" class="banner-gif">
+            <div class="banner-badge-preview">
+                <div class="mini-stat-box">
+                    <span class="mini-stat-num">68</span>
+                    <span class="mini-stat-label">Active Studios</span>
+                </div>
+                <div class="mini-stat-box">
+                    <span class="mini-stat-num">28</span>
+                    <span class="mini-stat-label">Verified HR</span>
+                </div>
             </div>
         </section>
 
         <!-- STATS & METRICS CARDS -->
         <section class="stats-grid">
             <div class="stat-card">
-                <div class="stat-icon-wrap bg-soft-pink">
-                    <span class="stat-emoji">🏛️</span>
+                <div class="stat-header">
+                    <span class="stat-label">Total Verified Studios</span>
+                    <i class="fa-solid fa-building-columns stat-icon"></i>
                 </div>
-                <div class="stat-meta">
-                    <span class="stat-label">Total Curated Firms</span>
-                    <h3 class="stat-value" id="stat-total">68</h3>
-                </div>
-                <div class="stat-badge">100% Commercial</div>
+                <h3 class="stat-value" id="stat-total">68</h3>
+                <div class="stat-footnote">100% Commercial / Production</div>
             </div>
 
             <div class="stat-card">
-                <div class="stat-icon-wrap bg-soft-rose">
-                    <span class="stat-emoji">📍</span>
+                <div class="stat-header">
+                    <span class="stat-label">Pune Region</span>
+                    <i class="fa-solid fa-location-dot stat-icon"></i>
                 </div>
-                <div class="stat-meta">
-                    <span class="stat-label">Pune Studios</span>
-                    <h3 class="stat-value" id="stat-pune">29</h3>
-                </div>
-                <div class="stat-badge">Baner • Aundh • KP</div>
+                <h3 class="stat-value" id="stat-pune">29</h3>
+                <div class="stat-footnote">Baner • Aundh • Koregaon Park</div>
             </div>
 
             <div class="stat-card">
-                <div class="stat-icon-wrap bg-soft-lavender">
-                    <span class="stat-emoji">🎬</span>
+                <div class="stat-header">
+                    <span class="stat-label">Mumbai & Film Hubs</span>
+                    <i class="fa-solid fa-film stat-icon"></i>
                 </div>
-                <div class="stat-meta">
-                    <span class="stat-label">Mumbai & Film Sets</span>
-                    <h3 class="stat-value" id="stat-mumbai">39</h3>
-                </div>
-                <div class="stat-badge">Bollywood • Ad-Films</div>
+                <h3 class="stat-value" id="stat-mumbai">39</h3>
+                <div class="stat-footnote">Bandra • Lower Parel • Andheri</div>
             </div>
 
             <div class="stat-card">
-                <div class="stat-icon-wrap bg-soft-gold">
-                    <span class="stat-emoji">⭐</span>
-                </div>
-                <div class="stat-meta">
+                <div class="stat-header">
                     <span class="stat-label">Direct HR Inboxes</span>
-                    <h3 class="stat-value" id="stat-hr">28</h3>
+                    <i class="fa-solid fa-envelope-circle-check stat-icon"></i>
                 </div>
-                <div class="stat-badge">Ready for Outreach</div>
+                <h3 class="stat-value" id="stat-hr">28</h3>
+                <div class="stat-footnote">High Response Probability</div>
             </div>
         </section>
 
-        <!-- SEARCH, FILTERS & ACTION CONTROLS -->
+        <!-- SEARCH & FILTER CONTROLS -->
         <section class="control-panel">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="search-input" placeholder="Search by studio name, specialization (e.g. hospitality, Bollywood, tech), or location...">
+                <input type="text" id="search-input" placeholder="Search by firm name, sector, software skill (e.g. AutoCAD, Rhino), or locality...">
                 <button id="clear-search" class="clear-btn" style="display:none;"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
@@ -172,23 +158,23 @@
                 <div class="filter-group">
                     <span class="filter-label">City:</span>
                     <button class="filter-pill active" data-filter="city" data-val="all">All (68)</button>
-                    <button class="filter-pill" data-filter="city" data-val="pune">Pune 📍</button>
-                    <button class="filter-pill" data-filter="city" data-val="mumbai">Mumbai 🎬</button>
+                    <button class="filter-pill" data-filter="city" data-val="pune">Pune</button>
+                    <button class="filter-pill" data-filter="city" data-val="mumbai">Mumbai</button>
                 </div>
 
                 <div class="filter-group">
                     <span class="filter-label">Sector:</span>
                     <button class="filter-pill active" data-filter="cat" data-val="all">All Sectors</button>
-                    <button class="filter-pill" data-filter="cat" data-val="Commercial Workspace">🏢 Commercial Workspace</button>
-                    <button class="filter-pill" data-filter="cat" data-val="Hospitality & Retail">☕ Hospitality & Retail</button>
-                    <button class="filter-pill" data-filter="cat" data-val="Set & Production Design">🎥 Set & Production Design</button>
-                    <button class="filter-pill" data-filter="cat" data-val="Exhibition & Experiential">🎪 Exhibition & Experiential</button>
+                    <button class="filter-pill" data-filter="cat" data-val="Commercial Workspace">Commercial Workspace</button>
+                    <button class="filter-pill" data-filter="cat" data-val="Hospitality & Retail">Hospitality & Retail</button>
+                    <button class="filter-pill" data-filter="cat" data-val="Set & Production Design">Set & Production Design</button>
+                    <button class="filter-pill" data-filter="cat" data-val="Exhibition & Experiential">Exhibition & Experiential</button>
                 </div>
 
                 <div class="filter-group">
-                    <span class="filter-label">Contact:</span>
-                    <button class="filter-pill" data-filter="contact" data-val="direct_hr">Direct HR Only ⭐</button>
-                    <button class="filter-pill" data-filter="contact" data-val="has_email">Has Direct Email ✉️</button>
+                    <span class="filter-label">Contacts:</span>
+                    <button class="filter-pill" data-filter="contact" data-val="direct_hr">Direct HR Inboxes Only</button>
+                    <button class="filter-pill" data-filter="contact" data-val="has_email">Has Email</button>
                 </div>
             </div>
         </section>
@@ -197,35 +183,32 @@
         <section class="sheet-section">
             <div class="sheet-header">
                 <div class="sheet-title-area">
-                    <div class="sheet-icon">📑</div>
-                    <div>
-                        <h2>Interactive Leads Spreadsheet</h2>
-                        <p class="sheet-count" id="results-count">Showing 68 verified studios</p>
-                    </div>
+                    <h2>Directory Leads Sheet</h2>
+                    <span class="sheet-count-tag" id="results-count">Showing 68 studios</span>
                 </div>
 
                 <div class="sheet-actions">
-                    <button class="btn-cute-action" id="open-outreach-modal">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        <span>Generate Email Pitch</span>
+                    <button class="btn-sleek-action" id="open-outreach-modal">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Draft Pitch</span>
                     </button>
                 </div>
             </div>
 
-            <!-- TABLE WRAPPER WITH SPREADSHEET VIBE -->
+            <!-- TABLE WRAPPER -->
             <div class="table-container">
                 <table class="leads-table" id="leads-table">
                     <thead>
                         <tr>
                             <th style="width: 45px;">#</th>
-                            <th style="min-width: 220px;">Firm Name & Focus</th>
-                            <th style="min-width: 130px;">City & Locality</th>
+                            <th style="min-width: 220px;">Studio Name & Focus</th>
+                            <th style="min-width: 140px;">City & Locality</th>
                             <th style="min-width: 170px;">Category</th>
                             <th style="min-width: 220px;">Contact Details</th>
-                            <th style="min-width: 130px;">Links</th>
-                            <th style="min-width: 260px;">What The Firm Does</th>
-                            <th style="min-width: 220px;">Internship & Software</th>
-                            <th style="min-width: 120px; text-align: center;">Actions</th>
+                            <th style="min-width: 120px;">Links</th>
+                            <th style="min-width: 280px;">Scope & Practice Profile</th>
+                            <th style="min-width: 220px;">Internship Details</th>
+                            <th style="min-width: 110px; text-align: center;">Outreach</th>
                         </tr>
                     </thead>
                     <tbody id="leads-tbody">
@@ -236,25 +219,21 @@
 
             <!-- EMPTY SEARCH STATE -->
             <div id="empty-state" class="empty-state" style="display:none;">
-                <div class="empty-emoji">🧸💭</div>
-                <h3>No studios found matching your search</h3>
-                <p>Try clearing filters or search with another keyword like "Baner", "Bollywood", or "Workspace".</p>
-                <button class="btn-reset-filter" id="reset-filter-btn">Reset All Filters</button>
+                <i class="fa-solid fa-folder-open empty-icon"></i>
+                <h3>No studios match your filter</h3>
+                <p>Try refining your search keyword or clearing the filters.</p>
+                <button class="btn-reset-filter" id="reset-filter-btn">Reset Filters</button>
             </div>
         </section>
 
-        <!-- CUTE FOOTER -->
-        <footer class="cute-footer">
-            <div class="footer-toys">
-                <span class="toy-item">🎀</span>
-                <span class="toy-item">🧸</span>
-                <span class="toy-item">🌸</span>
-                <span class="toy-item">🎨</span>
-                <span class="toy-item">🎬</span>
-                <span class="toy-item">✨</span>
+        <!-- MINIMAL FOOTER -->
+        <footer class="minimal-footer">
+            <div class="footer-left">
+                <span>Studio Scout • Commercial & Set Design Directory</span>
             </div>
-            <p class="footer-msg">Curated commercial interior & set design internship directory for Pune & Mumbai.</p>
-            <p class="footer-sub">All 68 firms verified for Commercial Interior & Set Design • Winter to Spring 2026</p>
+            <div class="footer-right">
+                <span>Pune & Mumbai • Winter to Spring 2026 Term</span>
+            </div>
         </footer>
 
     </div>
@@ -273,37 +252,34 @@
     <div id="outreach-modal" class="modal-overlay" style="display:none;">
         <div class="modal-card">
             <div class="modal-header">
-                <div class="modal-title-wrap">
-                    <span class="modal-emoji">💌</span>
-                    <div>
-                        <h3>Smart Internship Pitch Generator</h3>
-                        <p>Generates a polite, highly tailored email pitch ready to send!</p>
-                    </div>
+                <div>
+                    <h3>Tailored Pitch Drafter</h3>
+                    <p>Pre-fills a professional, studio-specific application draft ready to send.</p>
                 </div>
                 <button class="modal-close-btn" id="modal-close">&times;</button>
             </div>
 
             <div class="modal-body">
                 <div class="form-row">
-                    <label>Select Firm to Target:</label>
+                    <label>Target Studio:</label>
                     <select id="modal-firm-select" class="form-select">
                         <!-- Filled by JS -->
                     </select>
                 </div>
 
                 <div class="form-row">
-                    <label>Your Name:</label>
-                    <input type="text" id="pitch-sender-name" class="form-input" value="Your Name" placeholder="Enter your name">
+                    <label>Applicant Name:</label>
+                    <input type="text" id="pitch-sender-name" class="form-input" value="Applicant Name" placeholder="Your name">
                 </div>
 
                 <div class="form-row">
                     <label>Portfolio Link (optional):</label>
-                    <input type="text" id="pitch-portfolio-url" class="form-input" placeholder="e.g. behance.net/yourprofile or Google Drive link">
+                    <input type="text" id="pitch-portfolio-url" class="form-input" placeholder="e.g. behance.net/portfolio or Drive link">
                 </div>
 
                 <div class="pitch-preview-box">
                     <div class="preview-header">
-                        <span>Generated Email Draft:</span>
+                        <span>Application Draft</span>
                         <button class="btn-copy-pitch" id="copy-pitch-btn">
                             <i class="fa-solid fa-copy"></i> Copy Draft
                         </button>
@@ -317,16 +293,16 @@
 
             <div class="modal-footer">
                 <a href="#" id="pitch-mailto-btn" class="btn-open-email" target="_blank">
-                    <i class="fa-solid fa-paper-plane"></i> Open in Email Client
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Open in Email
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- ==================== CUTE TOAST NOTIFICATION ==================== -->
+    <!-- ==================== MINIMAL TOAST NOTIFICATION ==================== -->
     <div id="cute-toast" class="cute-toast">
-        <span class="toast-icon">✨</span>
-        <span class="toast-msg" id="toast-text">Message</span>
+        <i class="fa-solid fa-circle-check toast-icon"></i>
+        <span class="toast-msg" id="toast-text">Notification</span>
     </div>
 
     <script src="app.js"></script>
