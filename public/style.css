@@ -394,7 +394,7 @@ body {
     gap: 12px;
 }
 
-.cute-love-pill {
+.cute-tag-pill {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -405,16 +405,6 @@ body {
     border-radius: var(--radius-pill);
     font-size: 0.86rem;
     font-weight: 700;
-}
-
-.heart-pulse {
-    color: #e91e63;
-    animation: heartBeat 1.4s infinite;
-}
-
-@keyframes heartBeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.25); }
 }
 
 .nav-btn {

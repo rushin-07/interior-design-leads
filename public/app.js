@@ -29,7 +29,7 @@ function initFloatingSparkles() {
     const container = document.getElementById('sparkles-container');
     if (!container) return;
 
-    const symbols = ['💖', '🌸', '✨', '🎀', '🧸', '⭐'];
+    const symbols = ['🌸', '✨', '🎀', '🧸', '⭐'];
     
     for (let i = 0; i < 16; i++) {
         const heart = document.createElement('div');
@@ -78,7 +78,7 @@ function handleUnlock() {
             });
         }
 
-        showToast('Welcome in, beautiful! Dashboard unlocked 💖');
+        showToast('Directory unlocked! ✨');
         setTimeout(() => {
             unlockDashboard(true);
         }, 350);
