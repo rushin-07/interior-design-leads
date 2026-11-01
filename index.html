@@ -29,15 +29,15 @@
             <h2 class="gate-title">Studio Scout</h2>
             <p class="gate-subtitle">Commercial interior & set design internship directory across Pune & Mumbai.</p>
             
-            <form id="gate-form" class="gate-form" onsubmit="event.preventDefault(); handleUnlock();">
+            <form id="gate-form" class="gate-form" onsubmit="event.preventDefault(); handleUnlock(event);">
                 <div class="input-wrapper">
                     <i class="fa-solid fa-lock input-icon"></i>
-                    <input type="text" id="password-input" placeholder="Enter access key..." autocomplete="off" autofocus>
+                    <input type="text" id="password-input" placeholder="Enter access key (e.g. QT🌶️)..." autocomplete="off" autofocus>
                     <button type="button" class="btn-pepper" id="pepper-btn" title="Add pepper emoji">🌶️</button>
                 </div>
                 <div id="gate-error" class="gate-error" style="display:none;"></div>
                 
-                <button type="submit" class="btn-unlock">
+                <button type="button" id="unlock-btn" class="btn-unlock" onclick="handleUnlock(event);">
                     <span>Enter Directory</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>

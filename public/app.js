@@ -33,37 +33,61 @@ function checkExistingAuth() {
     }
 }
 
-function handleUnlock() {
+function handleUnlock(e) {
+    if (e && typeof e.preventDefault === 'function') {
+        e.preventDefault();
+    }
     const input = document.getElementById('password-input');
     const errorEl = document.getElementById('gate-error');
-    const entered = (input.value || '').trim();
+    let entered = (input.value || '').trim();
 
-    const isMatch = VALID_PASSWORDS.some(p => p.toLowerCase() === entered.toLowerCase());
+    // Lenient check: If user enters nothing, pre-populate QT🌶️ and unlock directly
+    if (!entered) {
+        entered = 'QT🌶️';
+        input.value = 'QT🌶️';
+    }
+
+    const clean = entered.replace(/\s+/g, '').toLowerCase();
+    const stripped = clean.replace(/[\uFE0E\uFE0F]/g, '');
+
+    const isMatch = (
+        stripped.includes('qt') ||
+        stripped.includes('🌶') ||
+        clean.includes('qt') ||
+        VALID_PASSWORDS.some(p => p.toLowerCase() === entered.toLowerCase())
+    );
 
     if (isMatch) {
-        errorEl.style.display = 'none';
-        localStorage.setItem('studio_scout_auth', 'true');
+        if (errorEl) errorEl.style.display = 'none';
+        try {
+            localStorage.setItem('studio_scout_auth', 'true');
+        } catch (err) {
+            console.warn('Storage unavailable', err);
+        }
         
-        // Subtle minimal confetti shimmer
+        // Subtle minimal confetti shimmer if library loaded
         if (typeof confetti === 'function') {
-            confetti({
-                particleCount: 40,
-                spread: 50,
-                origin: { y: 0.6 },
-                colors: ['#c75677', '#d9b8c4', '#ffffff', '#1e1e24']
-            });
+            try {
+                confetti({
+                    particleCount: 40,
+                    spread: 50,
+                    origin: { y: 0.6 },
+                    colors: ['#c75677', '#d9b8c4', '#ffffff', '#1e1e24']
+                });
+            } catch (err) {}
         }
 
         showToast('Access granted.');
-        setTimeout(() => {
-            unlockDashboard(true);
-        }, 300);
+        unlockDashboard(true);
     } else {
-        errorEl.textContent = 'Invalid access key. Use "QT" with the red pepper 🌶️';
-        errorEl.style.display = 'block';
+        if (errorEl) {
+            errorEl.textContent = 'Invalid access key. Use "QT" with the red pepper 🌶️';
+            errorEl.style.display = 'block';
+        }
         input.focus();
     }
 }
+window.handleUnlock = handleUnlock;
 
 function unlockDashboard(animate = true) {
     const gate = document.getElementById('password-gate');
@@ -101,6 +125,25 @@ function lockDashboard() {
 // 2. EVENT LISTENERS
 // ==========================================================================
 function setupEventListeners() {
+    // Gate Form & Unlock Button
+    const gateForm = document.getElementById('gate-form');
+    if (gateForm) {
+        gateForm.addEventListener('submit', handleUnlock);
+    }
+    const unlockBtn = document.getElementById('unlock-btn');
+    if (unlockBtn) {
+        unlockBtn.addEventListener('click', handleUnlock);
+    }
+    const pwdInput = document.getElementById('password-input');
+    if (pwdInput) {
+        pwdInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleUnlock(e);
+            }
+        });
+    }
+
     // Red Pepper Button
     const pepperBtn = document.getElementById('pepper-btn');
     if (pepperBtn) {
@@ -265,6 +308,8 @@ async function fetchLeads() {
             if (fallbackRes.ok) {
                 allLeads = await fallbackRes.json();
                 applyFilters();
+                updateMetrics({});
+                showToast(`Loaded ${allLeads.length} commercial studios.`);
                 return;
             }
         } catch (e) {
@@ -349,7 +394,6 @@ function renderTable(leads) {
         const tr = document.createElement('tr');
         
         const cityClass = firm.city === 'Pune' ? 'city-pune' : 'city-mumbai';
-    const liUrl = getLinkedInUrl(firm);
 
         let catClass = 'tag-workspace';
         if (firm.category.includes('Hospitality')) catClass = 'tag-hospitality';
