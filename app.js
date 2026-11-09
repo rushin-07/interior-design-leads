@@ -14,8 +14,8 @@ let currentFilters = {
 // Encouraging application cheer messages (Playful, motivating, featuring QT😘)
 const ENCOURAGING_QUOTES = [
     "Good luck QT😘! ✨",
-    "You're going to crush these applications, QT😘! 💼",
-    "Top design studios in Pune & Mumbai await, QT😘! 🏢",
+    "You're going to crush these applications! 💼",
+    "Top design studios in Pune & Mumbai await! 🏢",
     "Your portfolio is looking top tier, QT😘! 🎨",
     "Winter/Spring 2026 spots are open for you, QT😘! 🚀",
     "Go get that dream studio role, QT😘! 🌟",
