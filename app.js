@@ -759,8 +759,6 @@ function initSurprise() {
         if (e.target === overlay) closeSurpriseModal();
     });
 
-    // Auto-pop on initial load with a delightful 450ms intro delay
-    setTimeout(() => {
-        openSurpriseModal();
-    }, 450);
+    // Directly open surprise celebration on initial load
+    openSurpriseModal();
 }
