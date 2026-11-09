@@ -11,10 +11,24 @@ let currentFilters = {
     contact: 'all'
 };
 
+// Encouraging application cheer messages (Playful, motivating, zero romance/love words)
+const ENCOURAGING_QUOTES = [
+    "Good luck on your applications! ✨",
+    "You're going to crush these applications! 💼",
+    "Top design studios in Pune & Mumbai await! 🏢",
+    "Your portfolio is looking top tier! 🎨",
+    "Winter/Spring 2026 spots are open! 🚀",
+    "Go get that dream studio role! 🌟",
+    "One pitch at a time, you've got this! ✨",
+    "Commercial design powerhouse incoming! 💥"
+];
+let currentQuoteIdx = 0;
+
 // Initialize on Load (Immediate Open - No Passcode)
 document.addEventListener('DOMContentLoaded', () => {
     fetchLeads();
     setupEventListeners();
+    setupMascotAndCharm();
 });
 
 // ==========================================================================
@@ -140,11 +154,13 @@ function setupEventListeners() {
     // Copy Pitch Button
     const copyPitchBtn = document.getElementById('copy-pitch-btn');
     if (copyPitchBtn) {
-        copyPitchBtn.addEventListener('click', () => {
+        copyPitchBtn.addEventListener('click', (e) => {
             const textarea = document.getElementById('pitch-body-text');
             textarea.select();
             navigator.clipboard.writeText(textarea.value).then(() => {
-                showToast('Draft copied to clipboard.');
+                const rect = copyPitchBtn.getBoundingClientRect();
+                triggerSymbolBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+                showToast('Application draft copied! 📋');
             });
         });
     }
@@ -531,6 +547,7 @@ function exportCSV() {
     link.click();
     document.body.removeChild(link);
 
+    triggerSymbolBurst(window.innerWidth / 2, 80);
     showToast(`Exported ${filteredLeads.length} studios to CSV.`);
 }
 
@@ -548,4 +565,103 @@ function showToast(message, duration = 2200) {
     setTimeout(() => {
         toast.classList.remove('show');
     }, duration);
+}
+
+// ==========================================================================
+// 8. CUTE MASCOT & CHARM INTERACTION (💣🌶️)
+// ==========================================================================
+function setupMascotAndCharm() {
+    // 1. Top Nav Symbol Mascot Pill
+    const mascotBtn = document.getElementById('symbol-mascot');
+    if (mascotBtn) {
+        mascotBtn.addEventListener('click', (e) => {
+            const rect = mascotBtn.getBoundingClientRect();
+            triggerSymbolBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+            showToast('Energy boosted! ⚡');
+        });
+    }
+
+    // 2. Hero Section Symbol Tag Pill
+    const heroPill = document.getElementById('hero-symbol-pill');
+    if (heroPill) {
+        heroPill.addEventListener('click', (e) => {
+            const rect = heroPill.getBoundingClientRect();
+            triggerSymbolBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+            showToast('Special Edition active! ✨');
+        });
+    }
+
+    // 3. Floating Bottom Charm Companion
+    const charmFab = document.getElementById('cute-charm-fab');
+    const charmBubble = document.getElementById('charm-bubble');
+    const charmMessage = document.getElementById('charm-message');
+
+    if (charmFab) {
+        charmFab.addEventListener('click', (e) => {
+            const rect = charmFab.getBoundingClientRect();
+            triggerSymbolBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+            // Cycle encouraging message with a playful pop animation
+            currentQuoteIdx = (currentQuoteIdx + 1) % ENCOURAGING_QUOTES.length;
+            if (charmMessage) {
+                charmMessage.textContent = ENCOURAGING_QUOTES[currentQuoteIdx];
+            }
+            if (charmBubble) {
+                charmBubble.style.animation = 'none';
+                void charmBubble.offsetWidth; // Trigger reflow for animation restart
+                charmBubble.style.animation = 'bubblePop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            }
+        });
+    }
+}
+
+// ==========================================================================
+// 9. DELIGHTFUL SYMBOL PARTICLE BURST (💣🌶️)
+// ==========================================================================
+function triggerSymbolBurst(originX, originY) {
+    // 1. Canvas Confetti (blush & warm embers)
+    if (typeof confetti === 'function') {
+        try {
+            confetti({
+                particleCount: 30,
+                spread: 65,
+                origin: {
+                    x: originX !== undefined ? originX / window.innerWidth : 0.9,
+                    y: originY !== undefined ? originY / window.innerHeight : 0.9
+                },
+                colors: ['#c75677', '#ff6b8b', '#ff4757', '#ffa502', '#2f3542', '#ffffff']
+            });
+        } catch (err) {
+            console.debug('Confetti canvas unavailable', err);
+        }
+    }
+
+    // 2. Flying DOM Particle Emojis (💣 and 🌶️ with sparkles)
+    const startX = originX !== undefined ? originX : (window.innerWidth - 60);
+    const startY = originY !== undefined ? originY : (window.innerHeight - 60);
+    const symbols = ['💣', '🌶️', '✨', '💣', '🌶️', '⭐', '💫'];
+
+    for (let i = 0; i < 8; i++) {
+        const p = document.createElement('div');
+        p.className = 'flying-symbol-particle';
+        p.textContent = symbols[i % symbols.length];
+        p.style.left = `${startX + (Math.random() * 30 - 15)}px`;
+        p.style.top = `${startY + (Math.random() * 30 - 15)}px`;
+
+        const vx = (Math.random() * 160 - 80) + 'px';
+        const vy = -(Math.random() * 110 + 60) + 'px';
+        const rot = (Math.random() * 90 - 45) + 'deg';
+
+        p.style.setProperty('--vx', vx);
+        p.style.setProperty('--vy', vy);
+        p.style.setProperty('--rot', rot);
+
+        document.body.appendChild(p);
+
+        setTimeout(() => {
+            if (p.parentNode) {
+                p.parentNode.removeChild(p);
+            }
+        }, 1450);
+    }
 }

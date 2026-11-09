@@ -16,8 +16,13 @@
 </head>
 <body>
 
-    <!-- Minimal Ambient Background Glow -->
+    <!-- Minimal Ambient Background Glow & Floating Orbs -->
     <div class="ambient-glow"></div>
+    <div class="ambient-orbs" aria-hidden="true">
+        <span class="ambient-orb orb-1"></span>
+        <span class="ambient-orb orb-2"></span>
+        <span class="ambient-orb orb-3"></span>
+    </div>
 
     <!-- ==================== MAIN DASHBOARD CONTAINER ==================== -->
     <div id="main-dashboard" class="dashboard-wrapper">
@@ -38,6 +43,12 @@
             </div>
 
             <div class="nav-right">
+                <!-- Cute Interactive Symbol Mascot Pill -->
+                <button type="button" class="symbol-mascot-pill" id="symbol-mascot" title="Tap for good luck! 💣🌶️">
+                    <span class="mascot-emoji bomb-float">💣</span>
+                    <span class="mascot-emoji pepper-float">🌶️</span>
+                    <span class="mascot-sparkle">✨</span>
+                </button>
                 <button class="nav-btn btn-export" id="export-csv-btn">
                     <i class="fa-solid fa-download"></i>
                     <span>Export CSV</span>
@@ -52,7 +63,14 @@
         <!-- SLEEK HERO BANNER -->
         <section class="hero-banner">
             <div class="banner-content">
-                <div class="banner-pill">Curated Directory</div>
+                <div class="banner-tag-group">
+                    <div class="banner-pill">Curated Directory</div>
+                    <div class="symbol-hero-pill" id="hero-symbol-pill" title="Tap for sparks! 💣🌶️">
+                        <span class="symbol-pulse-dot"></span>
+                        <span class="symbol-duo">💣🌶️</span>
+                        <span class="symbol-edition-label">Special Edition</span>
+                    </div>
+                </div>
                 <h1>Commercial Workplaces & Set Design Studios</h1>
                 <p>Vetted database of commercial workplace architects, hospitality interiors, and Bollywood production design firms hiring interns for Dec 2026 – Apr 2026.</p>
                 <div class="banner-features">
@@ -266,9 +284,23 @@
         </div>
     </div>
 
+    <!-- ==================== CUTE FLOATING CHARM COMPANION (💣🌶️) ==================== -->
+    <aside class="cute-charm-wrapper" id="cute-charm-wrapper">
+        <div class="charm-bubble" id="charm-bubble">
+            <span id="charm-message">Good luck on your applications! ✨</span>
+        </div>
+        <button type="button" class="cute-charm-fab" id="cute-charm-fab" title="Tap for good luck! 💣🌶️" aria-label="Good luck charm">
+            <span class="charm-duo">
+                <span class="charm-bomb">💣</span>
+                <span class="charm-pepper">🌶️</span>
+            </span>
+            <span class="charm-glow-ring"></span>
+        </button>
+    </aside>
+
     <!-- ==================== MINIMAL TOAST NOTIFICATION ==================== -->
     <div id="cute-toast" class="cute-toast">
-        <i class="fa-solid fa-circle-check toast-icon"></i>
+        <span class="toast-symbol">💣🌶️</span>
         <span class="toast-msg" id="toast-text">Notification</span>
     </div>
 
