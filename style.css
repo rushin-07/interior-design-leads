@@ -1653,3 +1653,175 @@ body {
     margin-right: 4px;
 }
 
+/* ==========================================================================
+   QT😘 CUTE BADGES & DELIGHTFUL ANIMATIONS
+   ========================================================================== */
+
+/* Nav QT Badge */
+.qt-nav-badge {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent-blush);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    padding: 1px 7px;
+    border-radius: var(--radius-pill);
+    letter-spacing: 0.4px;
+    animation: qtPulse 2.8s ease-in-out infinite;
+    user-select: none;
+}
+
+/* Hero QT Badge */
+.qt-hero-badge {
+    color: var(--accent-blush);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.5px;
+    background: var(--accent-soft);
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--accent-border);
+    animation: qtPulse 3s ease-in-out infinite;
+}
+
+/* Charm Companion QT Tag */
+.charm-qt-tag {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #ffffff;
+    border: 1.5px solid var(--accent-border);
+    border-radius: var(--radius-pill);
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--accent-blush);
+    padding: 1px 5px;
+    box-shadow: 0 2px 6px rgba(199, 86, 119, 0.2);
+    animation: qtWiggle 2.5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes qtPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); box-shadow: 0 0 10px rgba(199, 86, 119, 0.25); }
+}
+
+@keyframes qtWiggle {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    30% { transform: rotate(-8deg) scale(1.1); }
+    70% { transform: rotate(8deg) scale(1.1); }
+}
+
+/* Jelly Pop Animation on Filter Pills */
+.filter-pill.jelly-pop {
+    animation: jellyPop 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes jellyPop {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.18, 0.84); }
+    60% { transform: scale(0.92, 1.12); }
+    80% { transform: scale(1.04, 0.96); }
+    100% { transform: scale(1); }
+}
+
+/* Table Row Staggered Slide In Cascade */
+.table-row-animate {
+    animation: rowFadeSlide 0.36s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes rowFadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Click Micro Sparkle Trail Across Page */
+.click-micro-sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    user-select: none;
+    font-size: 1.15rem;
+    will-change: transform, opacity;
+    animation: clickSparkleAnim 0.72s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes clickSparkleAnim {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0.5) rotate(0deg);
+    }
+    50% {
+        opacity: 0.95;
+        transform: translate(var(--svx, 0px), var(--svy, -26px)) scale(1.2) rotate(15deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(var(--svx, 0px) * 1.5), calc(var(--svy, -26px) - 22px)) scale(0.3) rotate(30deg);
+    }
+}
+
+/* Interactive Stat Card Enhancements */
+.stat-card {
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease, border-color 0.28s ease !important;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 14px 28px -4px rgba(199, 86, 119, 0.18) !important;
+    border-color: var(--accent-border) !important;
+}
+
+.stat-card:hover .stat-icon {
+    animation: iconBounce 0.6s ease;
+    color: #e63946;
+}
+
+@keyframes iconBounce {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    40% { transform: scale(1.35) rotate(-14deg); }
+    70% { transform: scale(1.15) rotate(10deg); }
+}
+
+/* Twinkling Direct HR verified star */
+.hr-star {
+    color: #f59e0b;
+    animation: starTwinkle 2.8s ease-in-out infinite;
+    display: inline-block;
+    margin-left: 2px;
+}
+
+@keyframes starTwinkle {
+    0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 1px rgba(245, 158, 11, 0.4)); }
+    50% { transform: scale(1.32) rotate(18deg); filter: drop-shadow(0 0 7px rgba(245, 158, 11, 0.85)); }
+}
+
+/* Draft button paper plane takeoff glide on hover */
+.btn-pitch:hover i {
+    animation: planeGlide 0.5s ease forwards;
+}
+
+@keyframes planeGlide {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(4px, -3px) rotate(-15deg); }
+    100% { transform: translate(2px, -1px) rotate(-8deg); }
+}
+
+/* Table Row Hover Delight */
+tbody tr {
+    transition: background-color 0.2s ease, transform 0.18s ease;
+}
+
+tbody tr:hover {
+    background-color: #fcf6f8 !important;
+    transform: scale(1.002);
+}
+
+

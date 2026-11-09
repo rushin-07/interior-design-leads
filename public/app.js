@@ -11,16 +11,16 @@ let currentFilters = {
     contact: 'all'
 };
 
-// Encouraging application cheer messages (Playful, motivating, zero romance/love words)
+// Encouraging application cheer messages (Playful, motivating, featuring QT😘)
 const ENCOURAGING_QUOTES = [
-    "Good luck on your applications! ✨",
-    "You're going to crush these applications! 💼",
-    "Top design studios in Pune & Mumbai await! 🏢",
-    "Your portfolio is looking top tier! 🎨",
-    "Winter/Spring 2026 spots are open! 🚀",
-    "Go get that dream studio role! 🌟",
-    "One pitch at a time, you've got this! ✨",
-    "Commercial design powerhouse incoming! 💥"
+    "Good luck QT😘! ✨",
+    "You're going to crush these applications, QT😘! 💼",
+    "Top design studios in Pune & Mumbai await, QT😘! 🏢",
+    "Your portfolio is looking top tier, QT😘! 🎨",
+    "Winter/Spring 2026 spots are open for you, QT😘! 🚀",
+    "Go get that dream studio role, QT😘! 🌟",
+    "One pitch at a time, you've got this QT😘! ✨",
+    "Commercial design powerhouse QT😘! 💥💣🌶️"
 ];
 let currentQuoteIdx = 0;
 
@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchLeads();
     setupEventListeners();
     setupMascotAndCharm();
+    setupClickSparkles();
 });
 
 // ==========================================================================
@@ -74,6 +75,9 @@ function setupEventListeners() {
     // Filter Pills
     document.querySelectorAll('.filter-pill').forEach(pill => {
         pill.addEventListener('click', () => {
+            pill.classList.add('jelly-pop');
+            setTimeout(() => pill.classList.remove('jelly-pop'), 450);
+
             const filterType = pill.getAttribute('data-filter');
             const filterVal = pill.getAttribute('data-val');
 
@@ -269,6 +273,8 @@ function renderTable(leads) {
 
     leads.forEach((firm, index) => {
         const tr = document.createElement('tr');
+        tr.className = 'table-row-animate';
+        tr.style.animationDelay = `${Math.min(index * 22, 500)}ms`;
         
         const cityClass = firm.city === 'Pune' ? 'city-pune' : 'city-mumbai';
 
@@ -636,12 +642,12 @@ function triggerSymbolBurst(originX, originY) {
         }
     }
 
-    // 2. Flying DOM Particle Emojis (💣 and 🌶️ with sparkles)
+    // 2. Flying DOM Particle Emojis (💣 and 🌶️ and QT😘 with sparkles)
     const startX = originX !== undefined ? originX : (window.innerWidth - 60);
     const startY = originY !== undefined ? originY : (window.innerHeight - 60);
-    const symbols = ['💣', '🌶️', '✨', '💣', '🌶️', '⭐', '💫'];
+    const symbols = ['💣', '🌶️', 'QT😘', '✨', '💣', '🌶️', 'QT😘', '⭐', '💫'];
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 9; i++) {
         const p = document.createElement('div');
         p.className = 'flying-symbol-particle';
         p.textContent = symbols[i % symbols.length];
@@ -664,4 +670,43 @@ function triggerSymbolBurst(originX, originY) {
             }
         }, 1450);
     }
+}
+
+// ==========================================================================
+// 10. INTERACTIVE CLICK SPARKLE TRAIL (FEATURING QT😘 & 💣🌶️)
+// ==========================================================================
+function setupClickSparkles() {
+    const sparkles = ['✨', '⭐', 'QT😘', '💣', '🌶️', '💫', '🌸'];
+    let lastSparkleTime = 0;
+
+    document.addEventListener('pointerdown', (e) => {
+        // Prevent interfering with input typing
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+        const now = Date.now();
+        if (now - lastSparkleTime < 70) return;
+        lastSparkleTime = now;
+
+        const count = 3;
+        for (let i = 0; i < count; i++) {
+            const spark = document.createElement('div');
+            spark.className = 'click-micro-sparkle';
+            spark.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+            
+            const offsetX = (Math.random() * 24 - 12);
+            const offsetY = (Math.random() * 24 - 12);
+            spark.style.left = `${e.clientX + offsetX}px`;
+            spark.style.top = `${e.clientY + offsetY}px`;
+
+            const vx = (Math.random() * 50 - 25) + 'px';
+            const vy = -(Math.random() * 40 + 25) + 'px';
+            spark.style.setProperty('--svx', vx);
+            spark.style.setProperty('--svy', vy);
+
+            document.body.appendChild(spark);
+            setTimeout(() => {
+                if (spark.parentNode) spark.parentNode.removeChild(spark);
+            }, 750);
+        }
+    }, { passive: true });
 }
