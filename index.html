@@ -43,6 +43,11 @@
             </div>
 
             <div class="nav-right">
+                <!-- Cute Surprise Replay Button -->
+                <button type="button" class="nav-btn btn-surprise" id="surprise-btn" title="Open Surprise Card! 🎁">
+                    <span>🎁</span>
+                    <span>Surprise</span>
+                </button>
                 <!-- Cute Interactive Symbol Mascot Pill with QT😘 -->
                 <button type="button" class="symbol-mascot-pill" id="symbol-mascot" title="Tap for sparks! 💣🌶️ QT😘">
                     <span class="mascot-emoji bomb-float">💣</span>
@@ -281,6 +286,63 @@
                 <a href="#" id="pitch-mailto-btn" class="btn-open-email" target="_blank">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i> Open in Email
                 </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== CUTE OPENING SURPRISE POPUP (QT😘 & 💣🌶️) ==================== -->
+    <div id="surprise-modal-overlay" class="surprise-modal-overlay" style="display: none;">
+        <div class="surprise-card" id="surprise-card">
+            <button type="button" class="surprise-close-btn" id="surprise-close-btn" aria-label="Close surprise">&times;</button>
+            
+            <div class="surprise-badge-row">
+                <span class="surprise-pill">💣🌶️ Special Delivery</span>
+                <span class="surprise-sparkle">✨</span>
+            </div>
+
+            <div class="surprise-mascot-avatar">
+                <span class="avatar-bomb">💣</span>
+                <span class="avatar-pepper">🌶️</span>
+                <div class="avatar-glow"></div>
+            </div>
+
+            <h2 class="surprise-title">Hey QT😘!</h2>
+            <p class="surprise-subtitle">Your private commercial interior & set design internship directory is ready for Winter/Spring 2026.</p>
+
+            <div class="surprise-perks-list">
+                <div class="surprise-perk-item">
+                    <div class="perk-icon">🏢</div>
+                    <div class="perk-info">
+                        <strong>68 Curated Studios</strong>
+                        <span>Pune & Mumbai only • Workplace, commercial architecture & Bollywood set design (zero residential)</span>
+                    </div>
+                </div>
+                <div class="surprise-perk-item">
+                    <div class="perk-icon">📬</div>
+                    <div class="perk-info">
+                        <strong>28 Direct HR Mailboxes</strong>
+                        <span>Verified contact points, official studio portfolios, and guaranteed LinkedIn search links</span>
+                    </div>
+                </div>
+                <div class="surprise-perk-item">
+                    <div class="perk-icon">🚀</div>
+                    <div class="perk-info">
+                        <strong>1-Click Tailored Pitch Drafter</strong>
+                        <span>Ready-to-send email applications customized for each firm</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="surprise-actions">
+                <button type="button" class="btn-surprise-enter" id="btn-surprise-enter">
+                    <span>Explore Studios</span>
+                    <span class="btn-emojis">💣🌶️</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+            
+            <div class="surprise-footer-note">
+                Go crush these applications, QT😘! 🌟
             </div>
         </div>
     </div>

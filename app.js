@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     setupMascotAndCharm();
     setupClickSparkles();
+    initSurprise();
 });
 
 // ==========================================================================
@@ -709,4 +710,57 @@ function setupClickSparkles() {
             }, 750);
         }
     }, { passive: true });
+}
+
+// ==========================================================================
+// 11. OPENING SURPRISE CELEBRATION (QT😘 & 💣🌶️)
+// ==========================================================================
+function initSurprise() {
+    const overlay = document.getElementById('surprise-modal-overlay');
+    const closeBtn = document.getElementById('surprise-close-btn');
+    const enterBtn = document.getElementById('btn-surprise-enter');
+    const replayBtn = document.getElementById('surprise-btn');
+
+    if (!overlay) return;
+
+    function openSurpriseModal() {
+        overlay.style.display = 'flex';
+        // Trigger celebratory confetti and symbol burst
+        setTimeout(() => {
+            triggerSymbolBurst(window.innerWidth / 2, window.innerHeight * 0.38);
+            if (typeof confetti === 'function') {
+                try {
+                    confetti({
+                        particleCount: 55,
+                        spread: 85,
+                        origin: { y: 0.45 },
+                        colors: ['#c75677', '#ff6b8b', '#ff4757', '#ffa502', '#ffd32a', '#ffffff']
+                    });
+                } catch (e) {}
+            }
+        }, 120);
+    }
+
+    function closeSurpriseModal() {
+        overlay.classList.add('closing');
+        triggerSymbolBurst(window.innerWidth / 2, window.innerHeight * 0.45);
+        showToast('Welcome QT😘! 💣🌶️');
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            overlay.classList.remove('closing');
+        }, 260);
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeSurpriseModal);
+    if (enterBtn) enterBtn.addEventListener('click', closeSurpriseModal);
+    if (replayBtn) replayBtn.addEventListener('click', openSurpriseModal);
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeSurpriseModal();
+    });
+
+    // Auto-pop on initial load with a delightful 450ms intro delay
+    setTimeout(() => {
+        openSurpriseModal();
+    }, 450);
 }
