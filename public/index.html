@@ -276,9 +276,14 @@
                         </button>
                     </div>
                     <div class="preview-subject">
-                        <strong>Subject:</strong> <span id="pitch-subject-text"></span>
+                        <div class="subject-text-wrap">
+                            <strong>Subject:</strong> <span id="pitch-subject-text"></span>
+                        </div>
+                        <button type="button" class="btn-copy-chip" title="Copy Subject Line" onclick="copyToClipboard(document.getElementById('pitch-subject-text').textContent, 'Subject line copied! 📋', event)">
+                            <i class="fa-regular fa-copy"></i> Copy Subject
+                        </button>
                     </div>
-                    <textarea id="pitch-body-text" class="pitch-textarea" rows="11" readonly></textarea>
+                    <textarea id="pitch-body-text" class="pitch-textarea" rows="11" placeholder="Application draft... (you can edit, copy or paste here)"></textarea>
                 </div>
             </div>
 

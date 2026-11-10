@@ -267,6 +267,110 @@ function getLinkedInUrl(firm) {
     return `https://www.linkedin.com/search/results/all/?keywords=${query}`;
 }
 
+// ==========================================================================
+// UNIVERSAL CLIPBOARD COPY SYSTEM (ONE-CLICK COPY ACROSS ALL DATA)
+// ==========================================================================
+function escapeJs(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/\\/g, '\\\\')
+        .replace(/'/g, "\\'")
+        .replace(/"/g, '&quot;')
+        .replace(/\n/g, ' ')
+        .replace(/\r/g, '');
+}
+
+function copyToClipboard(text, successMsg = 'Copied to clipboard! 📋', event = null) {
+    if (event) {
+        event.stopPropagation();
+        if (event.preventDefault) event.preventDefault();
+    }
+    if (!text || !text.trim()) {
+        showToast('Nothing to copy.');
+        return;
+    }
+
+    const cleanText = text.trim();
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(cleanText).then(() => {
+            handleCopySuccess(successMsg, event);
+        }).catch(() => {
+            fallbackCopyText(cleanText, successMsg, event);
+        });
+    } else {
+        fallbackCopyText(cleanText, successMsg, event);
+    }
+}
+window.copyToClipboard = copyToClipboard;
+
+function fallbackCopyText(text, successMsg, event) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    textArea.setAttribute('readonly', '');
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+            handleCopySuccess(successMsg, event);
+        } else {
+            showToast('Unable to copy automatically. Please select text.');
+        }
+    } catch (err) {
+        showToast('Unable to copy automatically.');
+    }
+    document.body.removeChild(textArea);
+}
+
+function handleCopySuccess(successMsg, event) {
+    showToast(successMsg);
+    if (event && event.currentTarget) {
+        const btn = event.currentTarget;
+        btn.classList.add('btn-copied-active');
+        const origContent = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+        setTimeout(() => {
+            btn.innerHTML = origContent;
+            btn.classList.remove('btn-copied-active');
+        }, 1400);
+    }
+}
+
+function copyStudioCard(firmId, event) {
+    if (event) {
+        event.stopPropagation();
+        if (event.preventDefault) event.preventDefault();
+    }
+    const firm = allLeads.find(f => f.id === firmId);
+    if (!firm) return;
+
+    const liUrl = getLinkedInUrl(firm);
+    const lines = [
+        `STUDIO: ${firm.name}`,
+        `LOCATION: ${firm.city} (${extractLocality(firm.address)})`,
+        `SECTOR: ${firm.category} ${firm.sub_category ? `(${firm.sub_category})` : ''}`,
+        `PRIMARY EMAIL: ${firm.email || 'N/A'}`,
+        firm.alt_email ? `CAREERS EMAIL: ${firm.alt_email}` : '',
+        `PHONE: ${firm.phone || 'N/A'}`,
+        `WEBSITE: ${firm.website || 'N/A'}`,
+        `LINKEDIN: ${liUrl}`,
+        `ADDRESS: ${firm.address || 'N/A'}`,
+        `PRACTICE PROFILE: ${firm.what_firm_does || 'N/A'}`,
+        `INTERNSHIP SCOPE: ${firm.internship_details || 'Dec 2026 – Apr 2026'}`,
+        `SOFTWARE/TOOLS: ${firm.software_skills || 'N/A'}`,
+        firm.stipend_range ? `STIPEND: ${firm.stipend_range}` : '',
+        firm.confidence ? `VERIFICATION: ${firm.confidence}` : ''
+    ].filter(Boolean);
+
+    copyToClipboard(lines.join('\n'), `${firm.name} complete details copied! 📋`, event);
+}
+window.copyStudioCard = copyStudioCard;
+
 function renderTable(leads) {
     const tbody = document.getElementById('leads-tbody');
     if (!tbody) return;
@@ -293,39 +397,93 @@ function renderTable(leads) {
         tr.innerHTML = `
             <td class="col-id">${index + 1}</td>
             <td class="firm-name-cell">
-                <div class="name-title">${firm.name} ${hrBadge}</div>
+                <div class="name-title-row">
+                    <span class="name-title">${firm.name} ${hrBadge}</span>
+                    <button type="button" class="btn-copy-chip" title="Copy Studio Name" onclick="copyToClipboard('${escapeJs(firm.name)}', 'Studio name copied! 📋', event)">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
                 <div class="name-sub">${firm.sub_category || ''}</div>
             </td>
             <td>
-                <span class="city-pill ${cityClass}">${firm.city}</span>
-                <span class="locality-text">${extractLocality(firm.address)}</span>
+                <div class="city-locality-row">
+                    <span class="city-pill ${cityClass}">${firm.city}</span>
+                    <span class="locality-text">${extractLocality(firm.address)}</span>
+                    <button type="button" class="btn-copy-chip mini-chip" title="Copy Locality" onclick="copyToClipboard('${escapeJs(extractLocality(firm.address))}, ${escapeJs(firm.city)}', 'Location copied! 📍', event)">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
             </td>
             <td>
                 <span class="category-tag ${catClass}">${firm.category}</span>
             </td>
             <td class="contact-cell">
-                ${firm.email ? `<a href="mailto:${firm.email}" class="contact-link" onclick="event.stopPropagation();"><i class="fa-solid fa-envelope"></i> ${firm.email}</a>` : '<span style="color:#aaa;">Direct portal</span>'}
-                ${firm.phone ? `<a href="tel:${firm.phone.replace(/[^0-9+]/g, '')}" class="contact-link" onclick="event.stopPropagation();"><i class="fa-solid fa-phone"></i> ${firm.phone}</a>` : ''}
+                ${firm.email ? `
+                    <div class="contact-item-row">
+                        <a href="mailto:${firm.email}" class="contact-link" onclick="event.stopPropagation();"><i class="fa-solid fa-envelope"></i> ${firm.email}</a>
+                        <button type="button" class="btn-copy-chip" title="Copy Email" onclick="copyToClipboard('${escapeJs(firm.email)}', 'Email copied: ${escapeJs(firm.email)}', event)">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>` : '<span style="color:#aaa;">Direct portal</span>'}
+                ${firm.phone ? `
+                    <div class="contact-item-row">
+                        <a href="tel:${firm.phone.replace(/[^0-9+]/g, '')}" class="contact-link" onclick="event.stopPropagation();"><i class="fa-solid fa-phone"></i> ${firm.phone}</a>
+                        <button type="button" class="btn-copy-chip" title="Copy Phone" onclick="copyToClipboard('${escapeJs(firm.phone)}', 'Phone copied: ${escapeJs(firm.phone)}', event)">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>` : ''}
             </td>
             <td class="links-cell" onclick="event.stopPropagation();">
-                ${firm.website ? `<a href="${firm.website}" target="_blank" rel="noopener noreferrer" class="icon-link" title="Website"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : ''}
-                <a href="${liUrl}" target="_blank" rel="noopener noreferrer" class="icon-link" title="LinkedIn Profile"><i class="fa-brands fa-linkedin-in"></i></a>
+                <div class="links-actions-group">
+                    ${firm.website ? `
+                        <div class="link-btn-combo">
+                            <a href="${firm.website}" target="_blank" rel="noopener noreferrer" class="icon-link" title="Open Website"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <button type="button" class="btn-copy-chip icon-copy-btn" title="Copy Website Link" onclick="copyToClipboard('${escapeJs(firm.website)}', 'Website URL copied! 🌐', event)">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    ` : ''}
+                    <div class="link-btn-combo">
+                        <a href="${liUrl}" target="_blank" rel="noopener noreferrer" class="icon-link" title="Open LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <button type="button" class="btn-copy-chip icon-copy-btn" title="Copy LinkedIn Link" onclick="copyToClipboard('${escapeJs(liUrl)}', 'LinkedIn URL copied! 💼', event)">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
             </td>
             <td>
-                <div class="desc-text" title="${escapeHtml(firm.what_firm_does)}">${firm.what_firm_does}</div>
+                <div class="desc-text-row">
+                    <div class="desc-text" title="${escapeHtml(firm.what_firm_does)}">${firm.what_firm_does}</div>
+                    <button type="button" class="btn-copy-chip desc-copy-btn" title="Copy Practice Profile" onclick="copyToClipboard('${escapeJs(firm.what_firm_does)}', 'Description copied! 📋', event)">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
             </td>
             <td class="intern-cell">
-                <div class="intern-timeline">Dec 2026 – Apr 2026</div>
-                <div class="software-pills">${firm.software_skills ? `Tools: ${firm.software_skills}` : ''}</div>
+                <div class="intern-timeline-row">
+                    <div class="intern-timeline">Dec 2026 – Apr 2026</div>
+                    <div class="software-pills">${firm.software_skills ? `Tools: ${firm.software_skills}` : ''}</div>
+                </div>
             </td>
             <td style="text-align: center;" onclick="event.stopPropagation();">
-                <button class="btn-pitch" onclick="openPitchModalForFirm(${firm.id})">
-                    <i class="fa-solid fa-paper-plane"></i> Draft
-                </button>
+                <div class="row-cta-stack">
+                    <button class="btn-pitch" onclick="openPitchModalForFirm(${firm.id})">
+                        <i class="fa-solid fa-paper-plane"></i> Draft
+                    </button>
+                    <button type="button" class="btn-row-copy-all" title="Copy Complete Studio Dossier" onclick="copyStudioCard(${firm.id}, event)">
+                        <i class="fa-regular fa-clipboard"></i> Copy Info
+                    </button>
+                </div>
             </td>
         `;
 
-        tr.addEventListener('click', () => openDrawer(firm));
+        tr.addEventListener('click', (e) => {
+            const selection = window.getSelection();
+            if (selection && selection.toString().trim().length > 0) {
+                return;
+            }
+            openDrawer(firm);
+        });
         tbody.appendChild(tr);
     });
 }
@@ -357,23 +515,43 @@ function openDrawer(firm) {
 
     content.innerHTML = `
         <div class="drawer-header">
-            <div class="drawer-badges">
-                <span class="city-pill ${cityClass}">${firm.city}</span>
-                <span class="category-tag tag-workspace">${firm.category}</span>
+            <div class="drawer-header-row">
+                <div class="drawer-badges">
+                    <span class="city-pill ${cityClass}">${firm.city}</span>
+                    <span class="category-tag tag-workspace">${firm.category}</span>
+                </div>
+                <button type="button" class="btn-drawer-header-copy" title="Copy Complete Studio Info" onclick="copyStudioCard(${firm.id}, event)">
+                    <i class="fa-regular fa-clipboard"></i> Copy All Details
+                </button>
             </div>
-            <h2 class="drawer-title">${firm.name}</h2>
+            <div class="drawer-title-row">
+                <h2 class="drawer-title">${firm.name}</h2>
+                <button type="button" class="btn-copy-chip" title="Copy Studio Name" onclick="copyToClipboard('${escapeJs(firm.name)}', 'Studio name copied! 📋', event)">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+            </div>
             <div class="drawer-sub">${firm.sub_category || ''}</div>
         </div>
 
         <div class="drawer-section">
-            <h4 class="drawer-section-title"><i class="fa-solid fa-briefcase"></i> Practice Profile</h4>
+            <div class="drawer-section-title-bar">
+                <h4 class="drawer-section-title"><i class="fa-solid fa-briefcase"></i> Practice Profile</h4>
+                <button type="button" class="btn-section-copy" onclick="copyToClipboard('${escapeJs(firm.what_firm_does)}', 'Practice description copied! 📋', event)">
+                    <i class="fa-regular fa-copy"></i> Copy
+                </button>
+            </div>
             <div class="drawer-info-card">
                 <p>${firm.what_firm_does}</p>
             </div>
         </div>
 
         <div class="drawer-section">
-            <h4 class="drawer-section-title"><i class="fa-solid fa-layer-group"></i> Internship Scope & Skills</h4>
+            <div class="drawer-section-title-bar">
+                <h4 class="drawer-section-title"><i class="fa-solid fa-layer-group"></i> Internship Scope & Skills</h4>
+                <button type="button" class="btn-section-copy" onclick="copyToClipboard('${escapeJs((firm.internship_details || 'Commercial architecture & set design internship') + (firm.software_skills ? ` | Key Software: ${firm.software_skills}` : ''))}', 'Internship details copied! 📋', event)">
+                    <i class="fa-regular fa-copy"></i> Copy
+                </button>
+            </div>
             <div class="drawer-info-card">
                 <p><strong>Timeline:</strong> December 2026 through March/April 2026</p>
                 <p style="margin-top:6px;"><strong>Details:</strong> ${firm.internship_details || 'Working drawings, site visits, and client presentations.'}</p>
@@ -383,49 +561,86 @@ function openDrawer(firm) {
         </div>
 
         <div class="drawer-section">
-            <h4 class="drawer-section-title"><i class="fa-solid fa-address-card"></i> Contact Information</h4>
+            <div class="drawer-section-title-bar">
+                <h4 class="drawer-section-title"><i class="fa-solid fa-address-card"></i> Contact Information</h4>
+            </div>
             <div class="drawer-contacts-list">
                 ${firm.email ? `
-                    <a href="mailto:${firm.email}" class="drawer-contact-item">
-                        <i class="fa-solid fa-envelope"></i>
-                        <span>Email: ${firm.email}</span>
-                    </a>
+                    <div class="drawer-contact-row">
+                        <a href="mailto:${firm.email}" class="drawer-contact-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>Email: ${firm.email}</span>
+                        </a>
+                        <button type="button" class="btn-drawer-copy" title="Copy Email" onclick="copyToClipboard('${escapeJs(firm.email)}', 'Email copied: ${escapeJs(firm.email)}', event)">
+                            <i class="fa-regular fa-copy"></i> Copy
+                        </button>
+                    </div>
                 ` : ''}
                 ${firm.alt_email ? `
-                    <a href="mailto:${firm.alt_email}" class="drawer-contact-item">
-                        <i class="fa-solid fa-at"></i>
-                        <span>Careers Inbox: ${firm.alt_email}</span>
-                    </a>
+                    <div class="drawer-contact-row">
+                        <a href="mailto:${firm.alt_email}" class="drawer-contact-item">
+                            <i class="fa-solid fa-at"></i>
+                            <span>Careers Inbox: ${firm.alt_email}</span>
+                        </a>
+                        <button type="button" class="btn-drawer-copy" title="Copy Careers Email" onclick="copyToClipboard('${escapeJs(firm.alt_email)}', 'Careers email copied: ${escapeJs(firm.alt_email)}', event)">
+                            <i class="fa-regular fa-copy"></i> Copy
+                        </button>
+                    </div>
                 ` : ''}
                 ${firm.phone ? `
-                    <a href="tel:${firm.phone.replace(/[^0-9+]/g, '')}" class="drawer-contact-item">
-                        <i class="fa-solid fa-phone"></i>
-                        <span>Direct: ${firm.phone}</span>
-                    </a>
+                    <div class="drawer-contact-row">
+                        <a href="tel:${firm.phone.replace(/[^0-9+]/g, '')}" class="drawer-contact-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <span>Direct: ${firm.phone}</span>
+                        </a>
+                        <button type="button" class="btn-drawer-copy" title="Copy Phone Number" onclick="copyToClipboard('${escapeJs(firm.phone)}', 'Phone copied: ${escapeJs(firm.phone)}', event)">
+                            <i class="fa-regular fa-copy"></i> Copy
+                        </button>
+                    </div>
                 ` : ''}
                 ${firm.website ? `
-                    <a href="${firm.website}" target="_blank" rel="noopener noreferrer" class="drawer-contact-item">
-                        <i class="fa-solid fa-globe"></i>
-                        <span>Portfolio: ${firm.website}</span>
-                    </a>
+                    <div class="drawer-contact-row">
+                        <a href="${firm.website}" target="_blank" rel="noopener noreferrer" class="drawer-contact-item">
+                            <i class="fa-solid fa-globe"></i>
+                            <span>Portfolio: ${firm.website}</span>
+                        </a>
+                        <button type="button" class="btn-drawer-copy" title="Copy Website Link" onclick="copyToClipboard('${escapeJs(firm.website)}', 'Website URL copied! 🌐', event)">
+                            <i class="fa-regular fa-copy"></i> Copy Link
+                        </button>
+                    </div>
                 ` : ''}
-                <a href="${liUrl}" target="_blank" rel="noopener noreferrer" class="drawer-contact-item">
-                    <i class="fa-brands fa-linkedin"></i>
-                    <span>LinkedIn Directory / Profile</span>
-                </a>
+                <div class="drawer-contact-row">
+                    <a href="${liUrl}" target="_blank" rel="noopener noreferrer" class="drawer-contact-item">
+                        <i class="fa-brands fa-linkedin"></i>
+                        <span>LinkedIn Directory / Profile</span>
+                    </a>
+                    <button type="button" class="btn-drawer-copy" title="Copy LinkedIn Link" onclick="copyToClipboard('${escapeJs(liUrl)}', 'LinkedIn URL copied! 💼', event)">
+                        <i class="fa-regular fa-copy"></i> Copy Link
+                    </button>
+                </div>
             </div>
         </div>
 
         <div class="drawer-section">
-            <h4 class="drawer-section-title"><i class="fa-solid fa-location-dot"></i> Studio Location</h4>
+            <div class="drawer-section-title-bar">
+                <h4 class="drawer-section-title"><i class="fa-solid fa-location-dot"></i> Studio Location</h4>
+                <button type="button" class="btn-section-copy" onclick="copyToClipboard('${escapeJs(firm.address)}', 'Studio address copied! 📍', event)">
+                    <i class="fa-regular fa-copy"></i> Copy Address
+                </button>
+            </div>
             <div class="drawer-info-card">
                 <p>${firm.address}</p>
             </div>
         </div>
 
-        <button class="drawer-pitch-cta" onclick="openPitchModalForFirm(${firm.id})">
-            <i class="fa-solid fa-paper-plane"></i> Draft Application for ${firm.name}
-        </button>
+        <div class="drawer-actions-container">
+            <button class="drawer-pitch-cta" onclick="openPitchModalForFirm(${firm.id})">
+                <i class="fa-solid fa-paper-plane"></i> Draft Application for ${firm.name}
+            </button>
+            <button type="button" class="drawer-copy-dossier-cta" onclick="copyStudioCard(${firm.id}, event)">
+                <i class="fa-regular fa-clipboard"></i> Copy Complete Studio Dossier
+            </button>
+        </div>
     `;
 
     overlay.style.display = 'flex';
@@ -681,8 +896,8 @@ function setupClickSparkles() {
     let lastSparkleTime = 0;
 
     document.addEventListener('pointerdown', (e) => {
-        // Prevent interfering with input typing
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        // Prevent interfering with input typing, text selection, or button clicks
+        if (e.target.closest('input, textarea, button, a, .btn-copy-chip, .btn-drawer-copy, .btn-section-copy, .btn-row-copy-all')) return;
 
         const now = Date.now();
         if (now - lastSparkleTime < 70) return;

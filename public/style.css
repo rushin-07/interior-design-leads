@@ -2090,5 +2090,342 @@ tbody tr:hover {
     letter-spacing: 0.3px;
 }
 
+/* ==========================================================================
+   GLOBAL COPY & PASTE PERMISSIONS & 1-CLICK COPY BUTTONS
+   ========================================================================== */
+
+/* Universal text selection enabled across dashboard */
+body, .dashboard-wrapper, table, tr, td, th, .drawer-content, .drawer-info-card, 
+.pitch-preview-box, p, span, strong, div, .locality-text, .name-title, .desc-text,
+.preview-subject, .form-input, .pitch-textarea {
+    -webkit-user-select: text !important;
+    user-select: text !important;
+}
+
+/* Interactive elements maintain clean non-text selection */
+button, .nav-btn, .filter-pill, .symbol-mascot-pill, .cute-charm-fab, .btn-copy-chip {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Copy Chip Button (Sleek, Minimalist, Tactile) */
+.btn-copy-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-sm);
+    padding: 3px 6px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+    line-height: 1;
+}
+
+.btn-copy-chip:hover {
+    border-color: var(--accent-blush);
+    color: var(--accent-blush);
+    background: var(--accent-soft);
+    transform: translateY(-1px);
+}
+
+.btn-copy-chip:active {
+    transform: scale(0.92);
+}
+
+.btn-copy-chip.btn-copied-active {
+    background: #ecfdf5 !important;
+    border-color: #10b981 !important;
+    color: #059669 !important;
+    font-weight: 700;
+}
+
+/* Table Name & Locality Copy Rows */
+.name-title-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.city-locality-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.mini-chip {
+    padding: 2px 5px;
+    font-size: 0.68rem;
+}
+
+/* Table Contact Items with Copy */
+.contact-item-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 3px;
+}
+
+.contact-item-row .contact-link {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Table Links with Copy */
+.links-actions-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.link-btn-combo {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.icon-copy-btn {
+    padding: 3px 5px;
+    font-size: 0.7rem;
+}
+
+/* Table Description with Copy */
+.desc-text-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.desc-copy-btn {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Table Row Actions Stack */
+.row-cta-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+}
+
+.btn-row-copy-all {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 5px 9px;
+    border-radius: var(--radius-sm);
+    font-size: 0.74rem;
+    font-weight: 600;
+    font-family: var(--font-main);
+    background: #ffffff;
+    border: 1px solid var(--card-border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    outline: none;
+}
+
+.btn-row-copy-all:hover {
+    border-color: var(--accent-blush);
+    color: var(--accent-blush);
+    background: var(--accent-soft);
+    transform: translateY(-1px);
+}
+
+.btn-row-copy-all.btn-copied-active {
+    background: #ecfdf5 !important;
+    border-color: #10b981 !important;
+    color: #059669 !important;
+}
+
+/* Drawer Header Copy */
+.drawer-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.btn-drawer-header-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #ffffff;
+    border: 1px solid var(--accent-border);
+    border-radius: var(--radius-pill);
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-blush);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-drawer-header-copy:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent-blush);
+    transform: translateY(-1px);
+}
+
+.drawer-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Drawer Section Header with Copy */
+.drawer-section-title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.drawer-section-title-bar .drawer-section-title {
+    margin-bottom: 0;
+}
+
+.btn-section-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #ffffff;
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-sm);
+    padding: 3px 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-section-copy:hover {
+    border-color: var(--accent-blush);
+    color: var(--accent-blush);
+    background: var(--accent-soft);
+}
+
+/* Drawer Contact Card with Direct Copy */
+.drawer-contact-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    transition: all 0.2s ease;
+}
+
+.drawer-contact-row:hover {
+    border-color: var(--accent-border);
+    box-shadow: 0 2px 8px rgba(199, 86, 119, 0.08);
+}
+
+.drawer-contact-row .drawer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.drawer-contact-row .drawer-contact-item i {
+    color: var(--accent-blush);
+    font-size: 0.95rem;
+}
+
+.btn-drawer-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--bg-base);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-sm);
+    padding: 4px 9px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-drawer-copy:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent-blush);
+    color: var(--accent-blush);
+    transform: translateY(-1px);
+}
+
+.btn-drawer-copy.btn-copied-active, .btn-section-copy.btn-copied-active, .btn-drawer-header-copy.btn-copied-active {
+    background: #ecfdf5 !important;
+    border-color: #10b981 !important;
+    color: #059669 !important;
+}
+
+/* Drawer Actions Container */
+.drawer-actions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.drawer-copy-dossier-cta {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: var(--radius-sm);
+    background: #ffffff;
+    border: 1.5px solid var(--accent-border);
+    color: var(--accent-blush);
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.drawer-copy-dossier-cta:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent-blush);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(199, 86, 119, 0.14);
+}
+
+/* Subject line copy row in Pitch Modal */
+.preview-subject {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.subject-text-wrap {
+    flex: 1;
+}
+
+
 
 
