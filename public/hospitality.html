@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Scout | Mumbai Minimalist & Standout Hospitality Studios</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍽️</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="hospitality_style.css">
+</head>
+<body>
+
+    <!-- CONFETTI CANVAS -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- SITE HEADER -->
+    <header class="site-header">
+        <div class="nav-container">
+            <div class="brand-group">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>Studio Scout <span style="font-size:0.85rem;color:var(--terracotta);">Hospitality</span> 💣🌶️</h1>
+                    <div class="brand-tagline">Minimalist & Standout Dining Design • Mumbai Edition</div>
+                </div>
+            </div>
+
+            <!-- Mascot interactive pill -->
+            <div class="nav-center-mascot" onclick="onMascotPillClick()" title="Click for an extra boost!">
+                <span class="nav-mascot-emoji">💣🌶️</span>
+                <span>Hey QT😘! Ready for Mumbai hospitality?</span>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="nav-right-actions">
+                <button class="nav-link-btn" onclick="openSurpriseModal()" title="Replay Welcome Card">
+                    <i class="fa-solid fa-gift"></i> 🎁 Welcome
+                </button>
+                <a href="index.html" class="nav-link-btn primary" title="Switch to Workplace & Set Design Directory">
+                    <i class="fa-solid fa-building"></i> Workplace Directory
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-banner">
+        <div class="hero-card">
+            <div class="hero-badge-pill">
+                <span>💣🌶️ Curated for QT😘</span> • Standout Hospitality Architecture & Interiors
+            </div>
+            <h1 class="hero-title">
+                Mumbai Minimalist & Standout <span>Hospitality Studios</span>
+            </h1>
+            <p class="hero-subtitle">
+                A dedicated, hand-curated directory of premier interior design and architecture studios specializing in high-concept restaurants, craft cafes, speakeasy cocktail bars, and slow-space boutique hospitality across Mumbai. Directly in the pedigree of <strong>Studio RCI</strong> and <strong>Studio Hasta</strong>.
+            </p>
+            <div class="hero-curation-tags">
+                <span class="curation-tag"><i class="fa-solid fa-check"></i> Slow Spaces & Raw Lime Plasters</span>
+                <span class="curation-tag"><i class="fa-solid fa-check"></i> Monochromatic Sculptural Caves</span>
+                <span class="curation-tag"><i class="fa-solid fa-check"></i> High-Concept Audiophile & Speakeasy Bars</span>
+                <span class="curation-tag"><i class="fa-solid fa-check"></i> Heritage Mill & Bungalow Conversions</span>
+                <span class="curation-tag"><i class="fa-solid fa-check"></i> 100% Verified HR & Direct Portfolios</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- METRICS SECTION -->
+    <section class="metrics-section">
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-top">
+                    <span class="metric-label">Total Studios</span>
+                    <div class="metric-icon-wrap"><i class="fa-solid fa-wine-glass"></i></div>
+                </div>
+                <div class="metric-value" id="metric-total">19</div>
+                <div class="metric-note">Mumbai Standout Hospitality</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-top">
+                    <span class="metric-label">Direct HR Inboxes</span>
+                    <div class="metric-icon-wrap"><i class="fa-solid fa-envelope-circle-check"></i></div>
+                </div>
+                <div class="metric-value" id="metric-hr">16</div>
+                <div class="metric-note">Verified Contacts & Portfolios</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-top">
+                    <span class="metric-label">Flagship F&B Works</span>
+                    <div class="metric-icon-wrap"><i class="fa-solid fa-champagne-glasses"></i></div>
+                </div>
+                <div class="metric-value" id="metric-projects">45+</div>
+                <div class="metric-note">Bomdia, Sass Bar, Nami, Neuma</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-top">
+                    <span class="metric-label">Stipend Benchmark</span>
+                    <div class="metric-icon-wrap"><i class="fa-solid fa-coins"></i></div>
+                </div>
+                <div class="metric-value" id="metric-stipend">₹12k</div>
+                <div class="metric-note">Average Monthly Internship</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTROLS SECTION (SEARCH & FILTERS) -->
+    <section class="controls-section">
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass search-icon-decor"></i>
+            <input type="text" id="search-input" class="search-input-field" placeholder="Search by studio name, aesthetic (e.g. lime plaster, terrazzo), flagship work (e.g. Bomdia, Nami), or neighborhood...">
+            <button id="clear-search-btn" class="search-clear-btn" style="display:none;" title="Clear Search">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="filters-container">
+            <!-- Filter Group: Design Philosophy -->
+            <div class="filter-row">
+                <span class="filter-row-title">Design Style:</span>
+                <button class="filter-chip active" data-filter-group="subGenre" data-filter-val="all">All Styles (19)</button>
+                <button class="filter-chip" data-filter-group="subGenre" data-filter-val="Slow Spaces & Earthy Plasters">Slow Spaces & Earthy Plasters</button>
+                <button class="filter-chip" data-filter-group="subGenre" data-filter-val="Sculptural & Monochromatic">Sculptural & Monochromatic</button>
+                <button class="filter-chip" data-filter-group="subGenre" data-filter-val="High-Concept Bars & Speakeasies">High-Concept Bars & Speakeasies</button>
+                <button class="filter-chip" data-filter-group="subGenre" data-filter-val="Heritage Conversions">Heritage Conversions</button>
+                <button class="filter-chip" data-filter-group="subGenre" data-filter-val="Parametric & Architectural">Parametric & Architectural</button>
+            </div>
+
+            <!-- Filter Group: Neighborhood -->
+            <div class="filter-row">
+                <span class="filter-row-title">Locality:</span>
+                <button class="filter-chip active" data-filter-group="neighborhood" data-filter-val="all">All Mumbai</button>
+                <button class="filter-chip" data-filter-group="neighborhood" data-filter-val="Bandra">Bandra / Khar</button>
+                <button class="filter-chip" data-filter-group="neighborhood" data-filter-val="Lower Parel">Lower Parel / Worli</button>
+                <button class="filter-chip" data-filter-group="neighborhood" data-filter-val="Colaba">Colaba / Ballard Pier</button>
+                <button class="filter-chip" data-filter-group="neighborhood" data-filter-val="Vile Parle">Vile Parle / Santacruz</button>
+                <button class="filter-chip" data-filter-group="neighborhood" data-filter-val="Andheri">Andheri / Prabhadevi</button>
+            </div>
+
+            <!-- Filter Group: Verification -->
+            <div class="filter-row">
+                <span class="filter-row-title">Verification:</span>
+                <button class="filter-chip active" data-filter-group="confidence" data-filter-val="all">All Studios</button>
+                <button class="filter-chip" data-filter-group="confidence" data-filter-val="hr">Verified HR Inboxes Only</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTS META BAR -->
+    <div class="results-meta-bar">
+        <div class="results-count-badge">
+            <span>Showing</span>
+            <span class="results-count-number" id="results-count-text">19</span>
+            <span>Standout Hospitality Studios</span>
+        </div>
+        <div class="global-actions">
+            <button class="global-btn" onclick="copyText(allStudios.map(s => s.email).filter(Boolean).join(', '), 'All 19 studio emails copied to clipboard!')">
+                <i class="fa-regular fa-copy"></i> Copy All Emails
+            </button>
+            <button class="global-btn" onclick="copyText(allStudios.map(s => `${s.name} (${s.neighborhood}): ${s.website} | ${s.email}`).join('\n'), 'All studio summaries copied!')">
+                <i class="fa-solid fa-list-check"></i> Copy Quick List
+            </button>
+        </div>
+    </div>
+
+    <!-- STUDIOS GRID -->
+    <main class="studios-grid-container">
+        <div id="studios-grid" class="studios-cards-grid">
+            <!-- Studio cards rendered dynamically via hospitality_app.js -->
+        </div>
+
+        <div id="empty-state" style="display:none;text-align:center;padding:60px 20px;">
+            <div style="font-size:3rem;margin-bottom:12px;">🔍</div>
+            <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:6px;">No hospitality studios match your filters</h3>
+            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:18px;">Try clearing your search query or selecting "All Styles" to view all 19 studios.</p>
+            <button class="nav-link-btn primary" onclick="document.getElementById('clear-search-btn').click()">
+                Reset All Filters
+            </button>
+        </div>
+    </main>
+
+    <!-- FLOATING MASCOT COMPANION -->
+    <div class="floating-mascot-pill" onclick="onMascotPillClick()" title="Click for extra confidence!">
+        <span class="mascot-emoji-bubble">💣🌶️</span>
+        <span class="mascot-message-text" id="floating-mascot-text">You're going to crush these applications! 💼💣🌶️</span>
+    </div>
+
+    <!-- SURPRISE MODAL -->
+    <div id="surprise-modal" class="modal-backdrop" style="display:none;">
+        <div class="modal-window">
+            <button class="modal-close-btn" onclick="closeSurpriseModal()" title="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="surprise-avatar-wrap">
+                <span>💣🌶️</span>
+            </div>
+
+            <div class="surprise-header">
+                <h2>Hey QT😘!</h2>
+                <p>Welcome to your dedicated, private <strong>Mumbai Minimalist & Standout Hospitality Studios Dashboard</strong>!</p>
+            </div>
+
+            <div class="surprise-features-list">
+                <div class="surprise-feature-item">
+                    <i class="fa-solid fa-utensils"></i>
+                    <div>
+                        <strong>19 Curated Hospitality Design Studios</strong>
+                        <span>Hand-picked studios in the design category of Studio RCI and Studio Hasta—specializing in cafes, bistros, listening bars, and slow-space dining.</span>
+                    </div>
+                </div>
+
+                <div class="surprise-feature-item">
+                    <i class="fa-solid fa-palette"></i>
+                    <div>
+                        <strong>Minimalist & Standout Aesthetics</strong>
+                        <span>Raw lime plasters, rammed earth, Cycladic curves, cast terrazzo aggregate, monolithic concrete, and moody lighting choreography.</span>
+                    </div>
+                </div>
+
+                <div class="surprise-feature-item">
+                    <i class="fa-solid fa-copy"></i>
+                    <div>
+                        <strong>Universal 1-Click Copy Across Everything</strong>
+                        <span>Copy emails, phone numbers, addresses, official portfolios, and complete markdown studio dossiers with a single tap.</span>
+                    </div>
+                </div>
+
+                <div class="surprise-feature-item">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <div>
+                        <strong>Tailored F&B Cold Email Pitch Drafter</strong>
+                        <span>Instant customizable outreach pitch highlighting hospitality 3D visualization, custom bar joinery, and tactile material boards.</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="surprise-cta-btn" onclick="closeSurpriseModal(); fireConfetti();">
+                <i class="fa-solid fa-sparkles"></i> Explore Hospitality Studios 🚀
+            </button>
+        </div>
+    </div>
+
+    <!-- PITCH DRAFTER MODAL -->
+    <div id="pitch-modal" class="modal-backdrop" style="display:none;">
+        <div class="modal-window">
+            <button class="modal-close-btn" onclick="closePitchModal()" title="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="modal-header-section">
+                <h3 id="pitch-studio-title">Draft Pitch</h3>
+                <p>Tailored Cold Email Pitch for Hospitality Interior Design Internships (Winter/Spring 2026)</p>
+            </div>
+
+            <div class="pitch-field-group">
+                <div class="pitch-field-label">
+                    <span>Subject Line</span>
+                    <button class="copy-mini-btn" onclick="copyText(document.getElementById('pitch-subject').value, 'Subject line copied!')">
+                        <i class="fa-regular fa-copy"></i> Copy Subject
+                    </button>
+                </div>
+                <input type="text" id="pitch-subject" class="pitch-input-box">
+            </div>
+
+            <div class="pitch-field-group">
+                <div class="pitch-field-label">
+                    <span>Email Body (Editable)</span>
+                    <button class="copy-mini-btn" onclick="copyText(document.getElementById('pitch-body').value, 'Email body copied!')">
+                        <i class="fa-regular fa-copy"></i> Copy Body
+                    </button>
+                </div>
+                <textarea id="pitch-body" class="pitch-textarea-box"></textarea>
+            </div>
+
+            <div class="pitch-modal-actions">
+                <button class="pitch-copy-btn" onclick="copyPitchAndSubject()">
+                    <i class="fa-solid fa-copy"></i> Copy Full Pitch & Subject
+                </button>
+                <button class="pitch-mailto-btn" onclick="openMailClient()">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Open in Email
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div>
+                <strong>Studio Scout | Hospitality Edition</strong> • Curated for QT😘 💣🌶️
+            </div>
+            <div class="footer-mascot-quote">
+                "Precision, tactile craft, and confidence win every interview!" ✨
+            </div>
+            <div>
+                <a href="index.html" style="text-decoration:underline;color:var(--terracotta);">← Return to Workplace & Set Design Directory</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="hospitality_app.js"></script>
+</body>
+</html>
