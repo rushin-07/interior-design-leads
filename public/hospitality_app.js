@@ -103,6 +103,11 @@ function renderStudioCards() {
     
     return `
       <article class="studio-card" style="animation-delay: ${idx * 0.04}s;">
+        ${studio.reference_badge ? `
+        <div class="card-reference-badge">
+          <i class="fa-solid fa-star"></i> ${escapeHtml(studio.reference_badge)}
+        </div>
+        ` : ''}
         <div class="card-header-top">
           <div class="studio-title-group">
             <h2>
@@ -211,10 +216,39 @@ function applyFilters() {
       }
     }
     
-    // Sub-genre filter
+    // Sub-genre / Category filter
     if (activeFilters.subGenre !== 'all') {
-      if ((studio.sub_genre || '').toLowerCase() !== activeFilters.subGenre.toLowerCase()) {
-        return false;
+      const filterKey = activeFilters.subGenre.toLowerCase();
+      const sg = (studio.sub_genre || '').toLowerCase();
+      const aesthetic = (studio.aesthetic_profile || '').toLowerCase();
+      const projects = (studio.signature_projects || '').toLowerCase();
+      const badge = (studio.reference_badge || '').toLowerCase();
+
+      if (filterKey === 'speakeasies') {
+        const matches = sg.includes('speakeasy') || sg.includes('cave') || sg.includes('cocktail') || 
+                        sg.includes('club') || sg.includes('theatrical') || sg.includes('prohibition') ||
+                        badge.includes('ocho') || badge.includes('little easy') || badge.includes('fielia') ||
+                        badge.includes('charlee') || badge.includes('bar paradox');
+        if (!matches) return false;
+      } else if (filterKey === 'slow_spaces') {
+        const matches = sg.includes('slow') || sg.includes('tactile') || sg.includes('plaster') || 
+                        aesthetic.includes('lime plaster') || aesthetic.includes('slow') ||
+                        badge.includes('studio rci') || badge.includes('studio hasta');
+        if (!matches) return false;
+      } else if (filterKey === 'audiophile_bistros') {
+        const matches = sg.includes('audiophile') || sg.includes('bistro') || sg.includes('tapas') || 
+                        sg.includes('memphis') || projects.includes('bistro') || projects.includes('listening');
+        if (!matches) return false;
+      } else if (filterKey === 'heritage') {
+        const matches = sg.includes('heritage') || sg.includes('adaptive') || sg.includes('bungalow') || 
+                        sg.includes('mill') || projects.includes('heritage') || aesthetic.includes('heritage');
+        if (!matches) return false;
+      } else if (filterKey === 'parametric') {
+        const matches = sg.includes('parametric') || sg.includes('sculptural') || sg.includes('tessellated') ||
+                        sg.includes('eco-resort') || aesthetic.includes('sculptural') || aesthetic.includes('parametric');
+        if (!matches) return false;
+      } else {
+        if (!sg.includes(filterKey) && !aesthetic.includes(filterKey) && !badge.includes(filterKey)) return false;
       }
     }
     
