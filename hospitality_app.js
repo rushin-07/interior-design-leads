@@ -490,7 +490,7 @@ function resizeConfettiCanvas() {
 function fireConfetti() {
   if (!confettiCanvas || !ctx) return;
   
-  const colors = ['#c26143', '#e8ded1', '#566952', '#cfa85b', '#de8566', '#ffffff'];
+  const colors = ['#e05d84', '#f48fb1', '#fbcfe8', '#ff7597', '#c9466d', '#ffffff'];
   confettiPieces = [];
   
   for (let i = 0; i < 90; i++) {

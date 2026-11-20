@@ -1,41 +1,50 @@
 /* ==========================================================================
    HOSPITALITY DASHBOARD — MINIMALIST & STANDOUT STUDIOS (MUMBAI)
-   Aesthetic: Warm Minimalist, Tactile Earthy Plasters, Raw Stone & Terracotta
+   Theme: Chic Blush & Pastel Rose Pink (Curated for QT😘 💣🌶️)
    ========================================================================== */
 
 :root {
   --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
   
-  /* Palette: Warm Earthy Minimalist */
-  --bg-primary: #fcfbfa;
-  --bg-secondary: #f6f3ee;
+  /* Palette: Chic Rose & Soft Blush Pink */
+  --bg-primary: #fffafc;
+  --bg-secondary: #fbf3f6;
   --bg-card: #ffffff;
   --bg-card-hover: #ffffff;
-  --bg-dark: #1a1918;
+  --bg-dark: #1f1418;
   
-  --text-primary: #1e1b18;
-  --text-secondary: #5f5b55;
-  --text-muted: #8c867e;
+  --text-primary: #21191d;
+  --text-secondary: #5e5157;
+  --text-muted: #8e7c84;
   
-  --terracotta: #c26143;
-  --terracotta-light: #f5ebe6;
-  --terracotta-dark: #9e462d;
+  /* Pink Core Colors */
+  --pink: #e05d84;
+  --pink-hover: #c9466d;
+  --pink-light: #fdf2f5;
+  --pink-subtle: #f9e6ed;
+  --pink-dark: #9e2a4e;
+  --pink-glow: rgba(224, 93, 132, 0.25);
   
-  --sand: #e8ded1;
-  --sand-light: #f7f4ee;
+  /* Aliases for backwards compatibility */
+  --terracotta: #e05d84;
+  --terracotta-light: #fdf2f5;
+  --terracotta-dark: #9e2a4e;
   
-  --olive: #566952;
-  --olive-light: #edf2ec;
+  --sand: #f5d4df;
+  --sand-light: #fdf5f8;
   
-  --accent-gold: #cfa85b;
-  --border-light: #ede6dc;
-  --border-subtle: #f0ebe2;
+  --olive: #4d7a5c;
+  --olive-light: #edf7f0;
   
-  --shadow-sm: 0 2px 8px rgba(30, 27, 24, 0.04);
-  --shadow-md: 0 8px 24px rgba(30, 27, 24, 0.06);
-  --shadow-lg: 0 16px 40px rgba(30, 27, 24, 0.09);
-  --shadow-hover: 0 20px 48px rgba(194, 97, 67, 0.12);
+  --accent-gold: #d4a359;
+  --border-light: #f2e2e8;
+  --border-subtle: #f8ecf1;
+  
+  --shadow-sm: 0 2px 8px rgba(180, 70, 100, 0.04);
+  --shadow-md: 0 8px 24px rgba(180, 70, 100, 0.06);
+  --shadow-lg: 0 16px 40px rgba(180, 70, 100, 0.09);
+  --shadow-hover: 0 20px 48px rgba(224, 93, 132, 0.16);
   
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -61,8 +70,8 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   background-image: 
-    radial-gradient(at 0% 0%, rgba(194, 97, 67, 0.03) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(86, 105, 82, 0.03) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(224, 93, 132, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(244, 143, 177, 0.05) 0px, transparent 50%);
 }
 
 a {
@@ -85,7 +94,7 @@ button {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(252, 251, 250, 0.92);
+  background: rgba(255, 250, 252, 0.94);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border-light);
@@ -111,14 +120,14 @@ button {
 .brand-icon {
   width: 42px;
   height: 42px;
-  background: linear-gradient(135deg, var(--terracotta), var(--terracotta-dark));
+  background: linear-gradient(135deg, var(--pink), var(--pink-hover));
   color: white;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
-  box-shadow: 0 4px 12px rgba(194, 97, 67, 0.25);
+  box-shadow: 0 4px 14px var(--pink-glow);
   animation: gentleBreathe 4s ease-in-out infinite alternate;
 }
 
@@ -142,7 +151,7 @@ button {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--sand-light);
+  background: var(--pink-light);
   border: 1px solid var(--border-light);
   padding: 6px 14px;
   border-radius: var(--radius-pill);
@@ -155,7 +164,7 @@ button {
 
 .nav-center-mascot:hover {
   background: #ffffff;
-  border-color: var(--terracotta);
+  border-color: var(--pink);
   transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
 }
@@ -186,20 +195,20 @@ button {
 }
 
 .nav-link-btn:hover {
-  background: var(--sand-light);
+  background: var(--pink-light);
   color: var(--text-primary);
   border-color: var(--border-light);
 }
 
 .nav-link-btn.primary {
-  background: var(--terracotta);
+  background: var(--pink);
   color: white;
-  border-color: var(--terracotta);
-  box-shadow: 0 4px 12px rgba(194, 97, 67, 0.25);
+  border-color: var(--pink);
+  box-shadow: 0 4px 12px var(--pink-glow);
 }
 
 .nav-link-btn.primary:hover {
-  background: var(--terracotta-dark);
+  background: var(--pink-hover);
   transform: translateY(-1px);
 }
 
@@ -214,14 +223,14 @@ button {
 }
 
 .hero-card {
-  background: linear-gradient(135deg, #242220 0%, #171615 100%);
+  background: linear-gradient(135deg, #2b1821 0%, #1c0e15 100%);
   color: #ffffff;
   border-radius: var(--radius-lg);
   padding: 40px 44px;
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(244, 143, 177, 0.2);
 }
 
 .hero-card::before {
@@ -229,9 +238,9 @@ button {
   position: absolute;
   top: -60px;
   right: -60px;
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(circle, rgba(194, 97, 67, 0.28) 0%, rgba(194, 97, 67, 0) 70%);
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, rgba(224, 93, 132, 0.35) 0%, rgba(224, 93, 132, 0) 70%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -240,14 +249,14 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 6px 14px;
   border-radius: var(--radius-pill);
   font-size: 0.78rem;
   font-weight: 600;
-  color: #e0d8cf;
+  color: #fce7f0;
   margin-bottom: 18px;
 }
 
@@ -261,13 +270,13 @@ button {
 }
 
 .hero-title span {
-  color: #f2aa94;
+  color: #ffa1bd;
   font-style: italic;
 }
 
 .hero-subtitle {
   font-size: 1rem;
-  color: #c4bcb3;
+  color: #eedde4;
   max-width: 780px;
   line-height: 1.65;
   margin-bottom: 24px;
@@ -283,16 +292,16 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 6px 12px;
   border-radius: var(--radius-pill);
   font-size: 0.78rem;
-  color: #e6dfd8;
+  color: #f7ebf0;
 }
 
 .curation-tag i {
-  color: #f2aa94;
+  color: #ffa1bd;
   font-size: 0.72rem;
 }
 
@@ -326,7 +335,7 @@ button {
 .metric-card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-  border-color: var(--terracotta);
+  border-color: var(--pink);
 }
 
 .metric-top {
@@ -348,8 +357,8 @@ button {
   width: 34px;
   height: 34px;
   border-radius: var(--radius-sm);
-  background: var(--terracotta-light);
-  color: var(--terracotta);
+  background: var(--pink-light);
+  color: var(--pink);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -399,8 +408,8 @@ button {
 
 .search-input-field:focus {
   outline: none;
-  border-color: var(--terracotta);
-  box-shadow: 0 0 0 4px rgba(194, 97, 67, 0.1);
+  border-color: var(--pink);
+  box-shadow: 0 0 0 4px rgba(224, 93, 132, 0.12);
 }
 
 .search-icon-decor {
@@ -418,7 +427,7 @@ button {
   right: 18px;
   top: 50%;
   transform: translateY(-50%);
-  background: var(--sand-light);
+  background: var(--pink-light);
   border: none;
   width: 26px;
   height: 26px;
@@ -432,8 +441,8 @@ button {
 }
 
 .search-clear-btn:hover {
-  background: var(--terracotta-light);
-  color: var(--terracotta);
+  background: var(--pink);
+  color: #ffffff;
 }
 
 .filters-container {
@@ -469,7 +478,7 @@ button {
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-secondary);
-  background: var(--sand-light);
+  background: var(--pink-light);
   border: 1px solid transparent;
   transition: var(--transition);
 }
@@ -477,14 +486,14 @@ button {
 .filter-chip:hover {
   background: #ffffff;
   border-color: var(--border-light);
-  color: var(--text-primary);
+  color: var(--pink-dark);
 }
 
 .filter-chip.active {
-  background: var(--terracotta);
+  background: var(--pink);
   color: #ffffff;
-  border-color: var(--terracotta);
-  box-shadow: 0 2px 8px rgba(194, 97, 67, 0.25);
+  border-color: var(--pink);
+  box-shadow: 0 2px 8px var(--pink-glow);
 }
 
 /* ==========================================================================
@@ -510,12 +519,13 @@ button {
 }
 
 .results-count-number {
-  background: var(--terracotta-light);
-  color: var(--terracotta-dark);
+  background: var(--pink-light);
+  color: var(--pink-dark);
   font-weight: 700;
   padding: 2px 9px;
   border-radius: var(--radius-pill);
   font-size: 0.8rem;
+  border: 1px solid var(--border-light);
 }
 
 .global-actions {
@@ -539,8 +549,8 @@ button {
 }
 
 .global-btn:hover {
-  background: var(--sand-light);
-  color: var(--text-primary);
+  background: var(--pink-light);
+  color: var(--pink-dark);
   border-color: var(--border-light);
 }
 
@@ -576,7 +586,7 @@ button {
 .studio-card:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-hover);
-  border-color: rgba(194, 97, 67, 0.4);
+  border-color: rgba(224, 93, 132, 0.45);
 }
 
 .card-header-top {
@@ -607,7 +617,7 @@ button {
 
 .card-copy-name-btn:hover {
   opacity: 1;
-  color: var(--terracotta);
+  color: var(--pink);
 }
 
 .studio-neighborhood-tag {
@@ -627,14 +637,15 @@ button {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  background: var(--terracotta-light);
-  color: var(--terracotta-dark);
+  background: var(--pink-light);
+  color: var(--pink-dark);
+  border: 1px solid var(--border-light);
   white-space: nowrap;
 }
 
 .card-aesthetic-highlight {
-  background: var(--sand-light);
-  border-left: 3px solid var(--terracotta);
+  background: var(--pink-light);
+  border-left: 3px solid var(--pink);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   padding: 10px 14px;
   margin-bottom: 14px;
@@ -677,7 +688,7 @@ button {
 
 .software-skill-pill {
   font-size: 0.72rem;
-  background: #f0ede8;
+  background: #f7eff3;
   color: var(--text-secondary);
   padding: 3px 9px;
   border-radius: var(--radius-sm);
@@ -723,7 +734,7 @@ button {
 }
 
 .contact-quick-left i {
-  color: var(--terracotta);
+  color: var(--pink);
   width: 14px;
   text-align: center;
   font-size: 0.82rem;
@@ -737,8 +748,8 @@ button {
   font-weight: 600;
   padding: 3px 8px;
   border-radius: var(--radius-sm);
-  background: var(--sand-light);
-  color: var(--text-secondary);
+  background: var(--pink-light);
+  color: var(--pink-dark);
   border: 1px solid var(--border-light);
   transition: var(--transition);
   cursor: pointer;
@@ -746,9 +757,9 @@ button {
 }
 
 .copy-mini-btn:hover {
-  background: var(--terracotta-light);
-  color: var(--terracotta-dark);
-  border-color: rgba(194, 97, 67, 0.3);
+  background: var(--pink);
+  color: #ffffff;
+  border-color: var(--pink);
 }
 
 .card-actions-bar {
@@ -772,33 +783,34 @@ button {
 }
 
 .card-action-btn.pitch-btn {
-  background: var(--terracotta);
+  background: var(--pink);
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(194, 97, 67, 0.2);
+  box-shadow: 0 2px 8px var(--pink-glow);
 }
 
 .card-action-btn.pitch-btn:hover {
-  background: var(--terracotta-dark);
+  background: var(--pink-hover);
   transform: translateY(-1px);
 }
 
 .card-action-btn.dossier-btn {
-  background: var(--sand-light);
+  background: var(--pink-light);
   color: var(--text-primary);
   border: 1px solid var(--border-light);
 }
 
 .card-action-btn.dossier-btn:hover {
   background: #ffffff;
-  border-color: var(--terracotta);
+  border-color: var(--pink);
+  color: var(--pink-dark);
 }
 
 .card-action-icon-link {
   width: 36px;
   height: 36px;
   border-radius: var(--radius-sm);
-  background: var(--sand-light);
-  color: var(--text-secondary);
+  background: var(--pink-light);
+  color: var(--pink-dark);
   border: 1px solid var(--border-light);
   display: flex;
   align-items: center;
@@ -809,9 +821,9 @@ button {
 }
 
 .card-action-icon-link:hover {
-  background: #ffffff;
-  color: var(--terracotta);
-  border-color: var(--terracotta);
+  background: var(--pink);
+  color: #ffffff;
+  border-color: var(--pink);
   transform: translateY(-1px);
 }
 
@@ -822,7 +834,7 @@ button {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(26, 25, 24, 0.65);
+  background: rgba(31, 20, 24, 0.65);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 999;
@@ -854,7 +866,7 @@ button {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--sand-light);
+  background: var(--pink-light);
   color: var(--text-muted);
   display: flex;
   align-items: center;
@@ -864,8 +876,8 @@ button {
 }
 
 .modal-close-btn:hover {
-  background: var(--terracotta-light);
-  color: var(--terracotta);
+  background: var(--pink);
+  color: #ffffff;
 }
 
 .modal-header-section {
@@ -892,14 +904,14 @@ button {
   width: 76px;
   height: 76px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #c26143, #de8566);
+  background: linear-gradient(135deg, var(--pink), #f48fb1);
   margin: 0 auto 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 2.2rem;
   position: relative;
-  box-shadow: 0 8px 24px rgba(194, 97, 67, 0.35);
+  box-shadow: 0 8px 24px var(--pink-glow);
   animation: bounceAvatar 2.8s infinite ease-in-out;
 }
 
@@ -932,13 +944,14 @@ button {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  background: var(--sand-light);
+  background: var(--pink-light);
+  border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   padding: 12px 16px;
 }
 
 .surprise-feature-item i {
-  color: var(--terracotta);
+  color: var(--pink);
   font-size: 1.1rem;
   margin-top: 2px;
 }
@@ -958,7 +971,7 @@ button {
 .surprise-cta-btn {
   width: 100%;
   padding: 14px;
-  background: var(--terracotta);
+  background: var(--pink);
   color: #ffffff;
   border-radius: var(--radius-md);
   font-weight: 700;
@@ -967,12 +980,12 @@ button {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 16px rgba(194, 97, 67, 0.3);
+  box-shadow: 0 4px 16px var(--pink-glow);
   transition: var(--transition);
 }
 
 .surprise-cta-btn:hover {
-  background: var(--terracotta-dark);
+  background: var(--pink-hover);
   transform: translateY(-2px);
 }
 
@@ -996,7 +1009,7 @@ button {
 .pitch-input-box {
   width: 100%;
   padding: 10px 14px;
-  background: var(--sand-light);
+  background: var(--pink-light);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-sm);
   font-size: 0.88rem;
@@ -1008,7 +1021,7 @@ button {
   width: 100%;
   min-height: 180px;
   padding: 12px 14px;
-  background: var(--sand-light);
+  background: var(--pink-light);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-sm);
   font-size: 0.84rem;
@@ -1027,7 +1040,7 @@ button {
 .pitch-copy-btn {
   flex: 1;
   padding: 12px;
-  background: var(--terracotta);
+  background: var(--pink);
   color: #ffffff;
   border-radius: var(--radius-sm);
   font-weight: 700;
@@ -1036,18 +1049,19 @@ button {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  box-shadow: 0 2px 8px var(--pink-glow);
   transition: var(--transition);
 }
 
 .pitch-copy-btn:hover {
-  background: var(--terracotta-dark);
+  background: var(--pink-hover);
 }
 
 .pitch-mailto-btn {
   padding: 12px 18px;
-  background: var(--sand-light);
+  background: var(--pink-light);
   border: 1px solid var(--border-light);
-  color: var(--text-primary);
+  color: var(--pink-dark);
   border-radius: var(--radius-sm);
   font-weight: 600;
   font-size: 0.88rem;
@@ -1059,7 +1073,7 @@ button {
 
 .pitch-mailto-btn:hover {
   background: #ffffff;
-  border-color: var(--terracotta);
+  border-color: var(--pink);
 }
 
 /* ==========================================================================
@@ -1071,7 +1085,7 @@ button {
   bottom: 24px;
   right: 24px;
   z-index: 900;
-  background: rgba(30, 27, 24, 0.95);
+  background: rgba(33, 20, 25, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: #ffffff;
@@ -1080,15 +1094,15 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(180, 50, 80, 0.25);
+  border: 1px solid rgba(244, 143, 177, 0.25);
   cursor: pointer;
   transition: var(--transition);
 }
 
 .floating-mascot-pill:hover {
   transform: translateY(-2px) scale(1.02);
-  border-color: var(--terracotta);
+  border-color: var(--pink);
 }
 
 .mascot-emoji-bubble {
@@ -1099,7 +1113,7 @@ button {
 .mascot-message-text {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #f7f4ee;
+  color: #fff0f5;
   max-width: 220px;
   white-space: nowrap;
   overflow: hidden;
@@ -1118,7 +1132,7 @@ button {
 }
 
 .toast-notification {
-  background: #1a1918;
+  background: #21191d;
   color: #ffffff;
   padding: 10px 18px;
   border-radius: var(--radius-md);
@@ -1128,13 +1142,13 @@ button {
   align-items: center;
   gap: 8px;
   box-shadow: var(--shadow-md);
-  border: 1px solid rgba(194, 97, 67, 0.4);
+  border: 1px solid rgba(224, 93, 132, 0.4);
   animation: slideUpToast 0.25s ease-out;
   pointer-events: auto;
 }
 
 .toast-notification i {
-  color: #5bbd78;
+  color: #ffa1bd;
 }
 
 /* ==========================================================================
@@ -1154,7 +1168,7 @@ button {
 
 .site-footer {
   border-top: 1px solid var(--border-light);
-  background: var(--sand-light);
+  background: var(--pink-light);
   padding: 32px 24px;
   text-align: center;
   color: var(--text-muted);
@@ -1173,7 +1187,7 @@ button {
 
 .footer-mascot-quote {
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--pink-dark);
 }
 
 /* ==========================================================================
