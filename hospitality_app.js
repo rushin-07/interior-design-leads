@@ -112,7 +112,7 @@ function renderStudioCards() {
           <div class="studio-title-group">
             <h2>
               ${escapeHtml(studio.name)}
-              <button class="card-copy-name-btn" onclick="copyText('${escapeJs(studio.name)}', 'Studio name copied!')" title="Copy studio name">
+              <button class="card-copy-name-btn" onclick="copyText('${escapeJs(studio.name)}', 'Studio name copied!', event)" title="Copy studio name">
                 <i class="fa-regular fa-copy"></i>
               </button>
             </h2>
@@ -126,11 +126,21 @@ function renderStudioCards() {
         </div>
 
         <div class="card-aesthetic-highlight">
-          <strong>Aesthetic:</strong> ${escapeHtml(studio.aesthetic_profile || '')}
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;">
+            <div><strong>Aesthetic:</strong> ${escapeHtml(studio.aesthetic_profile || '')}</div>
+            <button class="card-mini-copy-chip" onclick="copyText('${escapeJs(studio.aesthetic_profile || '')}', 'Aesthetic notes copied!', event)" title="Copy aesthetic notes">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
         </div>
 
         <div class="card-signature-projects">
-          <strong>Flagship Work:</strong> ${escapeHtml(studio.signature_projects || '')}
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px;">
+            <div><strong>Flagship Work:</strong> ${escapeHtml(studio.signature_projects || '')}</div>
+            <button class="card-mini-copy-chip" onclick="copyText('${escapeJs(studio.signature_projects || '')}', 'Flagship projects copied!', event)" title="Copy flagship projects">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
         </div>
 
         <p class="card-about-body">
@@ -143,54 +153,111 @@ function renderStudioCards() {
         </div>
 
         <div class="card-contact-strip">
+          <!-- EMAIL -->
           <div class="contact-quick-item">
             <span class="contact-quick-left">
               <i class="fa-solid fa-envelope"></i>
-              <span>${escapeHtml(studio.email || 'Inquire via website')}</span>
+              <span title="${escapeHtml(studio.email || '')}">${escapeHtml(studio.email || 'Inquire via website')}</span>
             </span>
-            <button class="copy-mini-btn" onclick="copyText('${escapeJs(studio.email || '')}', 'Email copied!')" title="Copy email">
+            <button class="copy-mini-btn" onclick="copyText('${escapeJs(studio.email || '')}', 'Email copied!', event)" title="Copy email">
               <i class="fa-regular fa-copy"></i> Copy
             </button>
           </div>
 
+          <!-- INSTAGRAM -->
+          ${studio.instagram_handle ? `
+          <div class="contact-quick-item">
+            <span class="contact-quick-left">
+              <i class="fa-brands fa-instagram" style="color:var(--pink);"></i>
+              <span title="Instagram: ${escapeHtml(studio.instagram_handle)}">${escapeHtml(studio.instagram_handle)}</span>
+            </span>
+            <div style="display:flex;gap:4px;">
+              <button class="copy-mini-btn" onclick="copyText('${escapeJs(studio.instagram_handle)}', 'Instagram handle copied!', event)" title="Copy Instagram handle">
+                <i class="fa-regular fa-copy"></i> Copy
+              </button>
+              <a href="${escapeHtml(studio.instagram || `https://www.instagram.com/${studio.instagram_handle.replace('@', '')}/`)}" target="_blank" rel="noopener noreferrer" class="copy-mini-btn" title="Open Instagram Profile">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
+              </a>
+            </div>
+          </div>
+          ` : ''}
+
+          <!-- PHONE -->
           ${studio.phone ? `
           <div class="contact-quick-item">
             <span class="contact-quick-left">
               <i class="fa-solid fa-phone"></i>
               <span>${escapeHtml(studio.phone)}</span>
             </span>
-            <button class="copy-mini-btn" onclick="copyText('${escapeJs(studio.phone)}', 'Phone copied!')" title="Copy phone">
+            <button class="copy-mini-btn" onclick="copyText('${escapeJs(studio.phone)}', 'Phone copied!', event)" title="Copy phone">
               <i class="fa-regular fa-copy"></i> Copy
             </button>
           </div>
           ` : ''}
 
+          <!-- WEBSITE / PORTFOLIO -->
           <div class="contact-quick-item">
             <span class="contact-quick-left">
               <i class="fa-solid fa-globe"></i>
-              <span>Official Portfolio</span>
+              <span>Official Website</span>
             </span>
             <div style="display:flex;gap:4px;">
-              <button class="copy-mini-btn" onclick="copyText('${escapeJs(studio.website || '')}', 'Website link copied!')" title="Copy website link">
-                <i class="fa-regular fa-copy"></i>
+              <button class="copy-mini-btn" onclick="copyText('${escapeJs(studio.website || '')}', 'Website link copied!', event)" title="Copy website link">
+                <i class="fa-regular fa-copy"></i> Copy
               </button>
-              <a href="${escapeHtml(studio.website || '#')}" target="_blank" rel="noopener noreferrer" class="copy-mini-btn">
+              <a href="${escapeHtml(studio.website || '#')}" target="_blank" rel="noopener noreferrer" class="copy-mini-btn" title="Visit website">
                 <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
               </a>
             </div>
           </div>
+
+          <!-- LINKEDIN -->
+          ${studio.linkedin ? `
+          <div class="contact-quick-item">
+            <span class="contact-quick-left">
+              <i class="fa-brands fa-linkedin-in" style="color:#0a66c2;"></i>
+              <span>LinkedIn Profile</span>
+            </span>
+            <div style="display:flex;gap:4px;">
+              <button class="copy-mini-btn" onclick="copyText('${escapeJs(studio.linkedin)}', 'LinkedIn link copied!', event)" title="Copy LinkedIn link">
+                <i class="fa-regular fa-copy"></i> Copy
+              </button>
+              <a href="${escapeHtml(studio.linkedin)}" target="_blank" rel="noopener noreferrer" class="copy-mini-btn" title="Open LinkedIn Profile">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
+              </a>
+            </div>
+          </div>
+          ` : ''}
+
+          <!-- STUDIO ADDRESS -->
+          ${studio.address ? `
+          <div class="contact-quick-item">
+            <span class="contact-quick-left">
+              <i class="fa-solid fa-location-dot"></i>
+              <span class="contact-address-truncate" title="${escapeHtml(studio.address)}">${escapeHtml(studio.address)}</span>
+            </span>
+            <button class="copy-mini-btn" onclick="copyText('${escapeJs(studio.address)}', 'Address copied!', event)" title="Copy studio address">
+              <i class="fa-regular fa-copy"></i> Copy
+            </button>
+          </div>
+          ` : ''}
         </div>
 
         <div class="card-actions-bar">
           <button class="card-action-btn pitch-btn" onclick="openPitchModal(${studio.id})">
             <i class="fa-solid fa-paper-plane"></i> Draft Pitch
           </button>
-          <button class="card-action-btn dossier-btn" onclick="copyStudioDossier(${studio.id})">
+          <button class="card-action-btn dossier-btn" onclick="copyStudioDossier(${studio.id}, event)">
             <i class="fa-regular fa-file-lines"></i> Copy Dossier
           </button>
           <a href="${escapeHtml(studio.linkedin || '#')}" target="_blank" rel="noopener noreferrer" class="card-action-icon-link" title="Open LinkedIn Profile">
             <i class="fa-brands fa-linkedin-in"></i>
           </a>
+          ${studio.instagram ? `
+          <a href="${escapeHtml(studio.instagram)}" target="_blank" rel="noopener noreferrer" class="card-action-icon-link" title="Open Instagram Profile">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          ` : ''}
         </div>
       </article>
     `;
@@ -210,8 +277,9 @@ function applyFilters() {
       const matchAbout = (studio.what_firm_does || '').toLowerCase().includes(query);
       const matchNeighborhood = (studio.neighborhood || '').toLowerCase().includes(query);
       const matchSkills = (studio.software_skills || '').toLowerCase().includes(query);
-      
-      if (!matchName && !matchAesthetic && !matchProjects && !matchAbout && !matchNeighborhood && !matchSkills) {
+      const matchInstagram = (studio.instagram_handle || '').toLowerCase().includes(query);
+
+      if (!matchName && !matchAesthetic && !matchProjects && !matchAbout && !matchNeighborhood && !matchSkills && !matchInstagram) {
         return false;
       }
     }
@@ -318,7 +386,7 @@ function setupEventListeners() {
 }
 
 // Universal Copy Helper
-async function copyText(text, successMsg = 'Copied to clipboard!') {
+async function copyText(text, successMsg = 'Copied to clipboard!', ev = null) {
   if (!text) {
     showToast('No text available to copy');
     return;
@@ -326,7 +394,6 @@ async function copyText(text, successMsg = 'Copied to clipboard!') {
   
   try {
     await navigator.clipboard.writeText(text);
-    showToast(successMsg);
   } catch (err) {
     // Fallback for older browsers
     const textarea = document.createElement('textarea');
@@ -337,7 +404,21 @@ async function copyText(text, successMsg = 'Copied to clipboard!') {
     textarea.select();
     document.execCommand('copy');
     document.body.removeChild(textarea);
-    showToast(successMsg);
+  }
+
+  showToast(successMsg);
+
+  if (ev) {
+    const btn = ev.currentTarget || (ev.target && ev.target.closest('button'));
+    if (btn) {
+      const origContent = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+      btn.classList.add('btn-copied-active');
+      setTimeout(() => {
+        btn.innerHTML = origContent;
+        btn.classList.remove('btn-copied-active');
+      }, 1400);
+    }
   }
 }
 
@@ -365,7 +446,7 @@ function showToast(msg) {
 }
 
 // Copy Full Studio Dossier
-function copyStudioDossier(studioId) {
+function copyStudioDossier(studioId, ev = null) {
   const studio = allStudios.find(s => s.id === studioId);
   if (!studio) return;
   
@@ -374,6 +455,7 @@ function copyStudioDossier(studioId) {
 Studio Name: ${studio.name}
 Neighborhood: ${studio.neighborhood || studio.city}
 Aesthetic / Sub-Genre: ${studio.sub_genre}
+Instagram: ${studio.instagram_handle || 'N/A'} (${studio.instagram || 'N/A'})
 Website: ${studio.website}
 Email: ${studio.email}
 Phone: ${studio.phone || 'N/A'}
@@ -399,7 +481,7 @@ STIPEND RANGE:
 ${studio.stipend_range}
 ======================================================`;
 
-  copyText(dossier, `Dossier for ${studio.name} copied!`);
+  copyText(dossier, `Dossier for ${studio.name} copied!`, ev);
 }
 
 // Pitch Drafter Modal

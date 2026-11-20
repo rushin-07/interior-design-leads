@@ -169,10 +169,13 @@
             <span>Standout Hospitality Studios</span>
         </div>
         <div class="global-actions">
-            <button class="global-btn" onclick="copyText(allStudios.map(s => s.email).filter(Boolean).join(', '), 'All 22 studio emails copied to clipboard!')">
-                <i class="fa-regular fa-copy"></i> Copy All Emails
+            <button class="global-btn" onclick="copyText(allStudios.map(s => s.instagram_handle).filter(Boolean).join(' '), 'All 22 Instagram handles copied!', event)" title="Copy all Instagram handles">
+                <i class="fa-brands fa-instagram"></i> Copy All Instagram
             </button>
-            <button class="global-btn" onclick="copyText(allStudios.map(s => `${s.name} (${s.neighborhood}): ${s.website} | ${s.email}`).join('\n'), 'All studio summaries copied!')">
+            <button class="global-btn" onclick="copyText(allStudios.map(s => s.email).filter(Boolean).join(', '), 'All 22 studio emails copied!', event)" title="Copy all emails">
+                <i class="fa-regular fa-envelope"></i> Copy All Emails
+            </button>
+            <button class="global-btn" onclick="copyText(allStudios.map(s => `${s.name} (${s.neighborhood || s.city}) | IG: ${s.instagram_handle || 'N/A'} | Email: ${s.email} | Web: ${s.website}`).join('\n'), 'All studio summaries copied!', event)" title="Copy complete quick list">
                 <i class="fa-solid fa-list-check"></i> Copy Quick List
             </button>
         </div>
@@ -237,7 +240,7 @@
                     <i class="fa-solid fa-copy"></i>
                     <div>
                         <strong>Universal 1-Click Copy Across Everything</strong>
-                        <span>Copy emails, phone numbers, addresses, official portfolios, and complete markdown studio dossiers with a single tap.</span>
+                        <span>Copy Instagram handles, emails, phone numbers, addresses, official portfolios, and complete markdown studio dossiers with a single tap.</span>
                     </div>
                 </div>
 

@@ -129,16 +129,16 @@ function setupEventListeners() {
     }
 
     // Pitch Modal Close
-    const modalOverlay = document.getElementById('outreach-modal');
+    const modalBackdrop = document.getElementById('outreach-modal');
     const modalClose = document.getElementById('modal-close');
     const openPitchBtn = document.getElementById('open-outreach-modal');
-    if (openPitchBtn && modalOverlay) {
+    if (openPitchBtn && modalBackdrop) {
         openPitchBtn.addEventListener('click', () => openPitchModal());
     }
-    if (modalClose && modalOverlay) {
-        modalClose.addEventListener('click', () => { modalOverlay.style.display = 'none'; });
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) modalOverlay.style.display = 'none';
+    if (modalClose && modalBackdrop) {
+        modalClose.addEventListener('click', () => { modalBackdrop.style.display = 'none'; });
+        modalBackdrop.addEventListener('click', (e) => {
+            if (e.target === modalBackdrop) modalBackdrop.style.display = 'none';
         });
     }
 
@@ -236,7 +236,8 @@ function applyFilters() {
             (l.what_firm_does || '').toLowerCase().includes(q) ||
             (l.address || '').toLowerCase().includes(q) ||
             (l.sub_category || '').toLowerCase().includes(q) ||
-            (l.software_skills || '').toLowerCase().includes(q)
+            (l.software_skills || '').toLowerCase().includes(q) ||
+            (l.instagram_handle || '').toLowerCase().includes(q)
         );
     }
 
@@ -356,6 +357,7 @@ function copyStudioCard(firmId, event) {
         `SECTOR: ${firm.category} ${firm.sub_category ? `(${firm.sub_category})` : ''}`,
         `PRIMARY EMAIL: ${firm.email || 'N/A'}`,
         firm.alt_email ? `CAREERS EMAIL: ${firm.alt_email}` : '',
+        firm.instagram_handle ? `INSTAGRAM: ${firm.instagram_handle} (${firm.instagram || 'N/A'})` : '',
         `PHONE: ${firm.phone || 'N/A'}`,
         `WEBSITE: ${firm.website || 'N/A'}`,
         `LINKEDIN: ${liUrl}`,
@@ -449,6 +451,14 @@ function renderTable(leads) {
                             <i class="fa-regular fa-copy"></i>
                         </button>
                     </div>
+                    ${firm.instagram_handle ? `
+                        <div class="link-btn-combo">
+                            <a href="${firm.instagram || `https://www.instagram.com/${firm.instagram_handle.replace('@', '')}/`}" target="_blank" rel="noopener noreferrer" class="icon-link" title="Open Instagram (${firm.instagram_handle})"><i class="fa-brands fa-instagram"></i></a>
+                            <button type="button" class="btn-copy-chip icon-copy-btn" title="Copy Instagram Handle" onclick="copyToClipboard('${escapeJs(firm.instagram_handle)}', 'Instagram handle copied! 📸', event)">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    ` : ''}
                 </div>
             </td>
             <td>
@@ -618,6 +628,17 @@ function openDrawer(firm) {
                         <i class="fa-regular fa-copy"></i> Copy Link
                     </button>
                 </div>
+                ${firm.instagram_handle ? `
+                    <div class="drawer-contact-row">
+                        <a href="${firm.instagram || `https://www.instagram.com/${firm.instagram_handle.replace('@', '')}/`}" target="_blank" rel="noopener noreferrer" class="drawer-contact-item">
+                            <i class="fa-brands fa-instagram" style="color:#e05d84;"></i>
+                            <span>Instagram: ${firm.instagram_handle}</span>
+                        </a>
+                        <button type="button" class="btn-drawer-copy" title="Copy Instagram Handle" onclick="copyToClipboard('${escapeJs(firm.instagram_handle)}', 'Instagram handle copied! 📸', event)">
+                            <i class="fa-regular fa-copy"></i> Copy Handle
+                        </button>
+                    </div>
+                ` : ''}
             </div>
         </div>
 

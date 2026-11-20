@@ -784,6 +784,39 @@ button {
   border-color: var(--pink);
 }
 
+.copy-mini-btn.btn-copied-active,
+.btn-copied-active {
+  background: #2e7d32 !important;
+  color: #ffffff !important;
+  border-color: #2e7d32 !important;
+  transform: scale(0.98);
+}
+
+.card-mini-copy-chip {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 2px 4px;
+  font-size: 0.75rem;
+  opacity: 0.65;
+  transition: var(--transition);
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+}
+
+.card-mini-copy-chip:hover {
+  opacity: 1;
+  color: var(--pink);
+  background: rgba(224, 93, 132, 0.1);
+}
+
+.contact-address-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .card-actions-bar {
   margin-top: 14px;
   display: flex;
