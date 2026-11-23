@@ -86,7 +86,7 @@
                     <span class="metric-label">Total Studios</span>
                     <div class="metric-icon-wrap"><i class="fa-solid fa-wine-glass"></i></div>
                 </div>
-                <div class="metric-value" id="metric-total">22</div>
+                <div class="metric-value" id="metric-total">38</div>
                 <div class="metric-note">Mumbai Standout Hospitality</div>
             </div>
 
@@ -95,7 +95,7 @@
                     <span class="metric-label">Direct HR Inboxes</span>
                     <div class="metric-icon-wrap"><i class="fa-solid fa-envelope-circle-check"></i></div>
                 </div>
-                <div class="metric-value" id="metric-hr">20</div>
+                <div class="metric-value" id="metric-hr">35</div>
                 <div class="metric-note">Verified Contacts & Portfolios</div>
             </div>
 
@@ -104,8 +104,8 @@
                     <span class="metric-label">Flagship F&B Works</span>
                     <div class="metric-icon-wrap"><i class="fa-solid fa-champagne-glasses"></i></div>
                 </div>
-                <div class="metric-value" id="metric-projects">50+</div>
-                <div class="metric-note">OCHO, Fielia, The Little Easy, Charlee</div>
+                <div class="metric-value" id="metric-projects">90+</div>
+                <div class="metric-note">OCHO, Fielia, PCO, Bastian, Subko</div>
             </div>
 
             <div class="metric-card">
@@ -123,7 +123,7 @@
     <section class="controls-section">
         <div class="search-container">
             <i class="fa-solid fa-magnifying-glass search-icon-decor"></i>
-            <input type="text" id="search-input" class="search-input-field" placeholder="Search by studio name, aesthetic (e.g. volcanic rock, red glass, speakeasy), flagship work (e.g. Ocho, Little Easy, Fielia), or neighborhood...">
+            <input type="text" id="search-input" class="search-input-field" placeholder="Search by studio name, aesthetic (e.g. volcanic rock, red glass, speakeasy), flagship work (e.g. Ocho, PCO, Fielia, Bastian), or neighborhood...">
             <button id="clear-search-btn" class="search-clear-btn" style="display:none;" title="Clear Search">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -133,9 +133,9 @@
             <!-- Filter Group: Design Philosophy -->
             <div class="filter-row">
                 <span class="filter-row-title">Design Style:</span>
-                <button class="filter-chip active" data-filter-group="subGenre" data-filter-val="all">All Styles (22)</button>
-                <button class="filter-chip" data-filter-group="subGenre" data-filter-val="speakeasies">Theatrical Speakeasies & Cocktail Clubs (OCHO, Fielia, Little Easy)</button>
-                <button class="filter-chip" data-filter-group="subGenre" data-filter-val="slow_spaces">Slow Spaces & Tactile Plasters (Studio RCI, Hasta)</button>
+                <button class="filter-chip active" data-filter-group="subGenre" data-filter-val="all">All Styles (38)</button>
+                <button class="filter-chip" data-filter-group="subGenre" data-filter-val="speakeasies">Theatrical Speakeasies & Clubs (OCHO, PCO, Fielia, Little Easy)</button>
+                <button class="filter-chip" data-filter-group="subGenre" data-filter-val="slow_spaces">Slow Spaces & Tactile Plasters (Studio RCI, Hasta, Subko)</button>
                 <button class="filter-chip" data-filter-group="subGenre" data-filter-val="audiophile_bistros">Audiophile & Design Bistros</button>
                 <button class="filter-chip" data-filter-group="subGenre" data-filter-val="heritage">Heritage Conversions & Mill Vaults</button>
                 <button class="filter-chip" data-filter-group="subGenre" data-filter-val="parametric">Parametric & Sculptural Ceilings</button>
@@ -165,14 +165,14 @@
     <div class="results-meta-bar">
         <div class="results-count-badge">
             <span>Showing</span>
-            <span class="results-count-number" id="results-count-text">22</span>
+            <span class="results-count-number" id="results-count-text">38</span>
             <span>Standout Hospitality Studios</span>
         </div>
         <div class="global-actions">
-            <button class="global-btn" onclick="copyText(allStudios.map(s => s.instagram_handle).filter(Boolean).join(' '), 'All 22 Instagram handles copied!', event)" title="Copy all Instagram handles">
+            <button class="global-btn" onclick="copyText(allStudios.map(s => s.instagram_handle).filter(Boolean).join(' '), 'All 38 Instagram handles copied!', event)" title="Copy all Instagram handles">
                 <i class="fa-brands fa-instagram"></i> Copy All Instagram
             </button>
-            <button class="global-btn" onclick="copyText(allStudios.map(s => s.email).filter(Boolean).join(', '), 'All 22 studio emails copied!', event)" title="Copy all emails">
+            <button class="global-btn" onclick="copyText(allStudios.map(s => s.email).filter(Boolean).join(', '), 'All 38 studio emails copied!', event)" title="Copy all emails">
                 <i class="fa-regular fa-envelope"></i> Copy All Emails
             </button>
             <button class="global-btn" onclick="copyText(allStudios.map(s => `${s.name} (${s.neighborhood || s.city}) | IG: ${s.instagram_handle || 'N/A'} | Email: ${s.email} | Web: ${s.website}`).join('\n'), 'All studio summaries copied!', event)" title="Copy complete quick list">
@@ -190,7 +190,7 @@
         <div id="empty-state" style="display:none;text-align:center;padding:60px 20px;">
             <div style="font-size:3rem;margin-bottom:12px;">🔍</div>
             <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:6px;">No hospitality studios match your filters</h3>
-            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:18px;">Try clearing your search query or selecting "All Styles" to view all 22 studios.</p>
+            <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:18px;">Try clearing your search query or selecting "All Styles" to view all 38 studios.</p>
             <button class="nav-link-btn primary" onclick="document.getElementById('clear-search-btn').click()">
                 Reset All Filters
             </button>
@@ -223,8 +223,8 @@
                 <div class="surprise-feature-item">
                     <i class="fa-solid fa-utensils"></i>
                     <div>
-                        <strong>22 Curated Hospitality Design Studios</strong>
-                        <span>Hand-picked studios behind Fielia, OCHO, The Little Easy, Charlee, and Studio RCI / Studio Hasta aesthetics—specializing in theatrical speakeasies, Mayan caves, and slow-space dining.</span>
+                        <strong>38 Curated Hospitality Design Studios</strong>
+                        <span>Hand-picked studios behind Fielia, OCHO, PCO, The Little Easy, Bastian At The Top, Subko Craftery, Charlee, and Studio RCI / Studio Hasta aesthetics—specializing in theatrical speakeasies, Mayan caves, and slow-space dining.</span>
                     </div>
                 </div>
 

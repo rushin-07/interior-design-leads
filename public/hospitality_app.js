@@ -296,24 +296,33 @@ function applyFilters() {
         const matches = sg.includes('speakeasy') || sg.includes('cave') || sg.includes('cocktail') || 
                         sg.includes('club') || sg.includes('theatrical') || sg.includes('prohibition') ||
                         badge.includes('ocho') || badge.includes('little easy') || badge.includes('fielia') ||
-                        badge.includes('charlee') || badge.includes('bar paradox');
+                        badge.includes('charlee') || badge.includes('bar paradox') || badge.includes('pco') ||
+                        badge.includes('houdini') || badge.includes('bastian') || aesthetic.includes('speakeasy') ||
+                        aesthetic.includes('cave');
         if (!matches) return false;
       } else if (filterKey === 'slow_spaces') {
         const matches = sg.includes('slow') || sg.includes('tactile') || sg.includes('plaster') || 
-                        aesthetic.includes('lime plaster') || aesthetic.includes('slow') ||
-                        badge.includes('studio rci') || badge.includes('studio hasta');
+                        sg.includes('wabi-sabi') || aesthetic.includes('lime plaster') || aesthetic.includes('slow') ||
+                        aesthetic.includes('wabi-sabi') || badge.includes('subko') || badge.includes('paashh') ||
+                        badge.includes('studio rci') || badge.includes('studio hasta') || badge.includes('wabi-sabi');
         if (!matches) return false;
       } else if (filterKey === 'audiophile_bistros') {
         const matches = sg.includes('audiophile') || sg.includes('bistro') || sg.includes('tapas') || 
-                        sg.includes('memphis') || projects.includes('bistro') || projects.includes('listening');
+                        sg.includes('memphis') || sg.includes('diner') || sg.includes('cafe') ||
+                        projects.includes('bistro') || projects.includes('jamjar') || projects.includes('chantilly') ||
+                        projects.includes('diner') || projects.includes('cafe');
         if (!matches) return false;
       } else if (filterKey === 'heritage') {
         const matches = sg.includes('heritage') || sg.includes('adaptive') || sg.includes('bungalow') || 
-                        sg.includes('mill') || projects.includes('heritage') || aesthetic.includes('heritage');
+                        sg.includes('mill') || sg.includes('warehouse') || projects.includes('heritage') ||
+                        projects.includes('mill') || aesthetic.includes('heritage') || aesthetic.includes('brick barrel') ||
+                        badge.includes('heritage') || badge.includes('mill') || badge.includes('colonial');
         if (!matches) return false;
       } else if (filterKey === 'parametric') {
         const matches = sg.includes('parametric') || sg.includes('sculptural') || sg.includes('tessellated') ||
-                        sg.includes('eco-resort') || aesthetic.includes('sculptural') || aesthetic.includes('parametric');
+                        sg.includes('timber') || sg.includes('eco-resort') || aesthetic.includes('sculptural') ||
+                        aesthetic.includes('parametric') || aesthetic.includes('timber') || badge.includes('timber') ||
+                        badge.includes('sculptural');
         if (!matches) return false;
       } else {
         if (!sg.includes(filterKey) && !aesthetic.includes(filterKey) && !badge.includes(filterKey)) return false;
